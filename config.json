@@ -1,0 +1,27 @@
+{"langConfig" : [
+	{"uk" : "pymorphy2"},
+	{"ru" : "pymorphy2"},
+   	{"en" : "stanza"},
+	{"de" : ""},
+	{"he" : ""},
+	{"zh" : ""},
+	{"kv" : ""},
+	{"tl" : ""},
+	{"bcl" : ""},
+	{"xal" : ""},
+	{"ba" : ""},
+	{"ga" : ""}
+	],
+
+"minMessLength" : "5",
+"maxMessLength" : "2000",
+
+"ngrams" : [
+	{"1" : "words"},
+	{"2" : "bigrams"},
+	{"3" : "threegrams"}
+	],
+
+"maxNumNarratives" : "12"
+
+}
