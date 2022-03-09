@@ -53,11 +53,11 @@ if __name__ == "__main__":
                        continue
                     
                     if lang == 'uk':
-                        Words, Bigrams, Threegrams  = textProcessor.uk_ru_nl_processing(message, nlpModels[lang], defaultSWs[lang])    
+                        Words, Bigrams, Threegrams  = textProcessor.pymorphy_nlp(message, nlpModels[lang], defaultSWs[lang])    
                     elif lang == 'ru':
-                        Words, Bigrams, Threegrams  = textProcessor.uk_ru_nl_processing(message, nlpModels[lang], defaultSWs[lang])    
-                    elif lang == 'en':
-                        Words, Bigrams, Threegrams  = textProcessor.en_nl_processing(message, nlpModels[lang], defaultSWs[lang])    
+                        Words, Bigrams, Threegrams  = textProcessor.pymorphy_nlp(message, nlpModels[lang], defaultSWs[lang])    
+                    else:
+                        Words, Bigrams, Threegrams  = textProcessor.stanza_nlp(message, nlpModels[lang], defaultSWs[lang])    
     
                     termsRanker.most_freq_key_terms(Words, Bigrams, Threegrams, 
                                                     defaultConfigLoader.default_int_value('maxNumNarratives'))

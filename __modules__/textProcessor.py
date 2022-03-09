@@ -19,7 +19,7 @@ from nltk.tokenize import sent_tokenize
 from nltk.tokenize import word_tokenize
 from __modules__ import defaultModelsLoader, defaultSWsLoader
 
-def en_built_words(sent, Words, stopWords):
+def stanza_built_words(sent, Words, stopWords):
     WordsTags = []
     for word in sent.words:
         i = word.lemma
@@ -31,7 +31,7 @@ def en_built_words(sent, Words, stopWords):
             Words.append(i)
     return WordsTags, Words
 
-def en_built_bigrams(WordsTags, Bigrams, stopWords):
+def stanza_built_bigrams(WordsTags, Bigrams, stopWords):
     for i in range(1, len(WordsTags)):
         w1 = WordsTags[i-1][0] 
         w2 = WordsTags[i][0]
@@ -41,7 +41,7 @@ def en_built_bigrams(WordsTags, Bigrams, stopWords):
             Bigrams.append(w1+'_'+w2)
     return Bigrams
 
-def en_built_threegrams(WordsTags, Threegrams, stopWords):
+def stanza_built_threegrams(WordsTags, Threegrams, stopWords):
     for i in range(2, len(WordsTags)):
         w1 = WordsTags[i-2][0]
         w2 = WordsTags[i-1][0]
@@ -55,9 +55,7 @@ def en_built_threegrams(WordsTags, Threegrams, stopWords):
             Threegrams.append(w1+'_'+w2+'_'+w3)
     return Threegrams
 
-def built_words(sent, Words, nlpModel, stopWords):
-    SWords = []
-    NWords = []
+def built_words(sent, SWords, NWords, nlpModel, stopWords):
     WordsTags = []
     words = word_tokenize(sent)
     for word in words:
@@ -75,6 +73,8 @@ def built_bigrams(WordsTags, SWords, Bigrams, stopWords):
     for i in range(1, len(WordsTags)):
         w1 = WordsTags[i-1][0] 
         w2 = WordsTags[i][0]
+        #sw1 = SWords[i-1]
+        #sw2 = SWords[i]
         t1 = WordsTags[i-1][1]
         t2 = WordsTags[i][1]
         if (t1 == 'ADJF') and (t2 == 'NOUN') and (w1 not in stopWords) and (w2 not in stopWords):
@@ -86,37 +86,40 @@ def built_threegrams(WordsTags, SWords, Threegrams, stopWords):
         w1 = WordsTags[i-2][0]
         w2 = WordsTags[i-1][0]
         w3 = WordsTags[i][0]
-        sw3 = SWords[i]
+        #sw1 = SWords[i-2]
+        #sw2 = SWords[i-1]
+        #sw3 = SWords[i]
         t1 = WordsTags[i-2][1]
         t2 = WordsTags[i-1][1]
         t3 = WordsTags[i][1]
         if (t1 == 'NOUN') and ((t2 == 'CCONJ') or (t2 == 'PREP')) and (t3 == 'NOUN') and (w1 not in stopWords) and (w3 not in stopWords):
-            Threegrams.append(w1+'_'+w2+'_'+sw3)
+            Threegrams.append(w1+'_'+w2+'_'+w3)
         elif (t1 == 'ADJF') and (t2 == 'ADJF') and (t3 == 'NOUN') and (w1 not in stopWords) and (w2 not in stopWords) and (w3 not in stopWords):
-            Threegrams.append(w1+'_'+w2+'_'+sw3)
+            Threegrams.append(w1+'_'+w2+'_'+w3)
     return Threegrams
 
-def en_nl_processing(text, nlpModel, stopWords):
+def stanza_nlp(text, nlpModel, stopWords):
     Words = []
     Bigrams = []
     Threegrams = []
     doc = nlpModel(text)
     sents = doc.sentences
     for sent in sents:
-        WordsTags, Words = en_built_words(sent, Words, stopWords)
+        WordsTags, Words = stanza_built_words(sent, Words, stopWords)
         if len(WordsTags)>2:
-            Bigrams = en_built_bigrams(WordsTags, Bigrams, stopWords)
+            Bigrams = stanza_built_bigrams(WordsTags, Bigrams, stopWords)
         if len(WordsTags)>3:
-            Threegrams = en_built_threegrams(WordsTags, Threegrams, stopWords)
+            Threegrams = stanza_built_threegrams(WordsTags, Threegrams, stopWords)
     return Words, Bigrams, Threegrams
 
-def uk_ru_nl_processing(text, nlpModel, stopWords):
+def pymorphy_nlp(text, nlpModel, stopWords):
+    SWords =[]
     Words = []
     Bigrams = []
     Threegrams = []
     sents = sent_tokenize(text)
     for sent in sents:
-        WordsTags, SWords, NWords = built_words(sent, Words, nlpModel, stopWords)
+        WordsTags, SWords, Words = built_words(sent, SWords, Words, nlpModel, stopWords)
         if len(WordsTags)>2:
             Bigrams = built_bigrams(WordsTags, SWords, Bigrams, stopWords)
         if len(WordsTags)>3:
