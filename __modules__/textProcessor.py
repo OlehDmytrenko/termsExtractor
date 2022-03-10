@@ -22,13 +22,13 @@ from __modules__ import defaultModelsLoader, defaultSWsLoader
 def stanza_built_words(sent, Words, stopWords):
     WordsTags = []
     for word in sent.words:
-        i = word.lemma
-        j = word.upos
-        if j=='PROPN':
-            j = 'NOUN'
-        WordsTags.append((i,j))
-        if (i not in stopWords) and (j == 'NOUN'): 
-            Words.append(i)
+        nword = word.lemma
+        tag = word.upos
+        if tag == 'PROPN':
+            tag = 'NOUN'
+        WordsTags.append((nword,tag))
+        if (nword not in stopWords) and (tag == 'NOUN'): 
+            Words.append(nword)
     return WordsTags, Words
 
 def stanza_built_bigrams(WordsTags, Bigrams, stopWords):
@@ -71,29 +71,30 @@ def stanza_nlp(text, nlpModel, stopWords):
 
 def pymorphy2_built_words(sent, SWords, NWords, nlpModel, stopWords):
     WordsTags = []
+    SWords = []
     words = word_tokenize(sent)
     for word in words:
-        i = nlpModel.normal_forms(word)[0]
-        j = str((nlpModel.parse(word)[0]).tag.POS)
-        if j=='NPRO':
-            j = 'NOUN'
-        WordsTags.append((i,j))
+        nword = nlpModel.normal_forms(word)[0]
+        tag = str((nlpModel.parse(word)[0]).tag.POS)
+        if tag == 'NPRO':
+            tag = 'NOUN'
+        WordsTags.append((nword,tag))
         SWords.append(word)
-        if (i not in stopWords) and (j == 'NOUN'): 
-            NWords.append(i)
+        if (nword not in stopWords) and (tag == 'NOUN'): 
+            NWords.append(nword)
     return WordsTags, SWords, NWords
 
 def pymorphy2_built_bigrams(WordsTags, SWords, SBigrams, NBigrams, stopWords):
     for i in range(1, len(WordsTags)):
         nw1 = WordsTags[i-1][0] 
         nw2 = WordsTags[i][0]
-        sw1 = SWords[i-1]
+        #sw1 = SWords[i-1]
         #sw2 = SWords[i]
         t1 = WordsTags[i-1][1]
         t2 = WordsTags[i][1]
         if (t1 == 'ADJF') and (t2 == 'NOUN') and (nw1 not in stopWords) and (nw2 not in stopWords):
             NBigrams.append(nw1+'_'+nw2)
-            SBigrams.append(sw1+'_'+nw2)
+            SBigrams[nw1+'_'+nw2] = nw1+'_'+nw2
     return SBigrams, NBigrams
 
 def pymorphy2_built_threegrams(WordsTags, SWords, SThreegrams, NThreegrams, stopWords):
@@ -109,16 +110,16 @@ def pymorphy2_built_threegrams(WordsTags, SWords, SThreegrams, NThreegrams, stop
         t3 = WordsTags[i][1]
         if (t1 == 'NOUN') and ((t2 == 'CCONJ') or (t2 == 'PREP')) and (t3 == 'NOUN') and (nw1 not in stopWords) and (nw3 not in stopWords):
             NThreegrams.append(nw1+'_'+nw2+'_'+nw3)
-            SThreegrams.append(nw1+'_'+nw2+'_'+sw3)
+            SThreegrams[nw1+'_'+nw2+'_'+sw3] = nw1+'_'+nw2+'_'+nw3
         elif (t1 == 'ADJF') and (t2 == 'ADJF') and (t3 == 'NOUN') and (nw1 not in stopWords) and (nw2 not in stopWords) and (nw3 not in stopWords):
             NThreegrams.append(nw1+'_'+nw2+'_'+nw3)
-            SThreegrams.append(nw1+'_'+nw2+'_'+sw3)
+            SThreegrams[nw1+'_'+nw2+'_'+sw3] = nw1+'_'+nw2+'_'+nw3
     return SThreegrams, NThreegrams
 
 def pymorphy2_nlp(text, nlpModel, stopWords):
-    SWords =[]
-    SBigrams = []
-    SThreegrams = []
+    SWords = []
+    SBigrams = dict()
+    SThreegrams = dict()
     Words = []
     Bigrams = []
     Threegrams = []
