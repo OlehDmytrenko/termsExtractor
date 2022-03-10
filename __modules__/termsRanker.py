@@ -14,22 +14,41 @@ packagesInstaller.setup_packeges(packages)
 
 from nltk import FreqDist
 
-def most_freq(keyTerms, top):
+def stanza_most_freq(keyTerms, top):
     mostFreqKeyTerms = ''
     fdist = FreqDist(word.lower() for word in keyTerms)
     for (term, freq) in fdist.most_common(top):
         mostFreqKeyTerms = mostFreqKeyTerms + term  + ', ' 
     return mostFreqKeyTerms[:-2]
 
-def most_freq_key_terms(Words, Bigrams, Threegrams, top):
-    print (most_freq(Words,top))
-    print (most_freq(Bigrams, top))
-    print (most_freq(Threegrams,top))
+def stanza_most_freq_key_terms(Words, Bigrams, Threegrams, top):
+    print (stanza_most_freq(Words,top))
+    print (stanza_most_freq(Bigrams, top))
+    print (stanza_most_freq(Threegrams,top))
     print ('***')
     return
 
-def most_freq_key_terms_(nGrams, top):
-    for keyTerms in nGrams:
-        print (most_freq(keyTerms,top))
+def get_key(d, value):
+    for k, v in d.items():
+        if v == value:
+            return k
+
+def pymorphy2_most_freq(keyTerms, STerms, top):
+    mostFreqKeyTerms = ''
+    fdist = FreqDist(word.lower() for word in keyTerms)
+    for (term, freq) in fdist.most_common(top):
+        mostFreqKeyTerms = mostFreqKeyTerms + str(get_key(STerms, term))  + ', ' 
+    return mostFreqKeyTerms[:-2]
+
+def pymorphy2_most_freq_key_terms(SWords, Words, SBigrams, Bigrams, SThreegrams, Threegrams, top):
+    print (pymorphy2_most_freq(Words, SWords, top))
+    print (pymorphy2_most_freq(Bigrams, SBigrams, top))
+    print (pymorphy2_most_freq(Threegrams, SThreegrams, top))
     print ('***')
     return
+
+#def most_freq_key_terms_(nGrams, top):
+#    for keyTerms in nGrams:
+#        print (stanza_most_freq(keyTerms,top))
+#    print ('***')
+#    return

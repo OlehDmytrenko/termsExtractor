@@ -18,8 +18,8 @@
 
 "ngrams" : [
 	{"1" : "words"},
-	{"2" : "bigrams"},
-	{"3" : "threegrams"}
+	{"2" : "Bigrams"},
+	{"3" : "Threegrams"}
 	],
 
 "maxNumNarratives" : "12"

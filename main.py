@@ -25,9 +25,9 @@ packagesInstaller.setup_packeges(packages)
 from __modules__ import defaultConfigLoader, defaultModelsLoader, defaultSWsLoader, textProcessor, termsRanker
 
 if __name__ == "__main__":
-    #txtFileDir = sys.argv[1]
+    txtFileDir = sys.argv[1]
     #if start script not in CMD mode than comemnt line above and recomment line below
-    txtFileDir = '/Users/dmytrenko.o/Documents/GitHub/narrativesExtractor/datasets/otbor4.txt'
+    #txtFileDir = '/Users/dmytrenko.o/Documents/GitHub/narrativesExtractor/datasets/otbor4.txt'
     #txtFileDir = '/Users/dmytrenko.o/Documents/GitHub/narrativesExtractor/datasets/20210126.txt'
     #txtFileDir = '/Users/dmytrenko.o/Documents/GitHub/narrativesExtractor/datasets/20210126_(2).txt'
     
@@ -46,20 +46,18 @@ if __name__ == "__main__":
                 if message:
                     print (message)
                     message = (message.replace("\n"," "))[0:defaultConfigLoader.default_int_value('maxMessLength')] #delete all \n from input message              
-                
                     lang = textProcessor.lang_detect(message, defaultLangs, nlpModels, defaultSWs)
                     if (not defaultLangs[lang]):
                         message = ""
-                        continue
-                    
-                    if lang == 'uk':
+                        continue 
+                    if (defaultLangs[lang] == 'pymorphy2'):
                         Words, SBigrams, Bigrams, SThreegrams, Threegrams  = textProcessor.pymorphy2_nlp(message, nlpModels[lang], defaultSWs[lang])    
-                    elif lang == 'ru':
-                        Words, SBigrams, Bigrams, SThreegrams, Threegrams = textProcessor.pymorphy2_nlp(message, nlpModels[lang], defaultSWs[lang])    
-                    else:
+                        SWords = dict(list(zip(Words, Words)))
+                        termsRanker.pymorphy2_most_freq_key_terms(SWords, Words, SBigrams, Bigrams, SThreegrams, Threegrams,
+                                                        defaultConfigLoader.default_int_value('maxNumNarratives'))
+                    elif (defaultLangs[lang] == 'stanza'):
                         Words, Bigrams, Threegrams  = textProcessor.stanza_nlp(message, nlpModels[lang], defaultSWs[lang])    
-    
-                    termsRanker.most_freq_key_terms(Words, Bigrams, Threegrams,
+                        termsRanker.stanza_most_freq_key_terms(Words, Bigrams, Threegrams,
                                                     defaultConfigLoader.default_int_value('maxNumNarratives'))
                 message = ""
         inputFlow.close()
