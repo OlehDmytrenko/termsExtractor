@@ -55,49 +55,6 @@ def stanza_built_threegrams(WordsTags, Threegrams, stopWords):
             Threegrams.append(w1+'_'+w2+'_'+w3)
     return Threegrams
 
-def built_words(sent, SWords, NWords, nlpModel, stopWords):
-    WordsTags = []
-    words = word_tokenize(sent)
-    for word in words:
-        i = nlpModel.normal_forms(word)[0]
-        j = str((nlpModel.parse(word)[0]).tag.POS)
-        if j=='NPRO':
-            j = 'NOUN'
-        WordsTags.append((i,j))
-        SWords.append(word)
-        if (i not in stopWords) and (j == 'NOUN'): 
-            NWords.append(i)
-    return WordsTags, SWords, NWords
-
-def built_bigrams(WordsTags, SWords, Bigrams, stopWords):
-    for i in range(1, len(WordsTags)):
-        w1 = WordsTags[i-1][0] 
-        w2 = WordsTags[i][0]
-        #sw1 = SWords[i-1]
-        #sw2 = SWords[i]
-        t1 = WordsTags[i-1][1]
-        t2 = WordsTags[i][1]
-        if (t1 == 'ADJF') and (t2 == 'NOUN') and (w1 not in stopWords) and (w2 not in stopWords):
-            Bigrams.append(w1+'_'+w2)
-    return Bigrams
-
-def built_threegrams(WordsTags, SWords, Threegrams, stopWords):
-    for i in range(2, len(WordsTags)):
-        w1 = WordsTags[i-2][0]
-        w2 = WordsTags[i-1][0]
-        w3 = WordsTags[i][0]
-        #sw1 = SWords[i-2]
-        #sw2 = SWords[i-1]
-        #sw3 = SWords[i]
-        t1 = WordsTags[i-2][1]
-        t2 = WordsTags[i-1][1]
-        t3 = WordsTags[i][1]
-        if (t1 == 'NOUN') and ((t2 == 'CCONJ') or (t2 == 'PREP')) and (t3 == 'NOUN') and (w1 not in stopWords) and (w3 not in stopWords):
-            Threegrams.append(w1+'_'+w2+'_'+w3)
-        elif (t1 == 'ADJF') and (t2 == 'ADJF') and (t3 == 'NOUN') and (w1 not in stopWords) and (w2 not in stopWords) and (w3 not in stopWords):
-            Threegrams.append(w1+'_'+w2+'_'+w3)
-    return Threegrams
-
 def stanza_nlp(text, nlpModel, stopWords):
     Words = []
     Bigrams = []
@@ -112,20 +69,67 @@ def stanza_nlp(text, nlpModel, stopWords):
             Threegrams = stanza_built_threegrams(WordsTags, Threegrams, stopWords)
     return Words, Bigrams, Threegrams
 
-def pymorphy_nlp(text, nlpModel, stopWords):
+def pymorphy2_built_words(sent, SWords, NWords, nlpModel, stopWords):
+    WordsTags = []
+    words = word_tokenize(sent)
+    for word in words:
+        i = nlpModel.normal_forms(word)[0]
+        j = str((nlpModel.parse(word)[0]).tag.POS)
+        if j=='NPRO':
+            j = 'NOUN'
+        WordsTags.append((i,j))
+        SWords.append(word)
+        if (i not in stopWords) and (j == 'NOUN'): 
+            NWords.append(i)
+    return WordsTags, SWords, NWords
+
+def pymorphy2_built_bigrams(WordsTags, SWords, SBigrams, NBigrams, stopWords):
+    for i in range(1, len(WordsTags)):
+        nw1 = WordsTags[i-1][0] 
+        nw2 = WordsTags[i][0]
+        sw1 = SWords[i-1]
+        #sw2 = SWords[i]
+        t1 = WordsTags[i-1][1]
+        t2 = WordsTags[i][1]
+        if (t1 == 'ADJF') and (t2 == 'NOUN') and (nw1 not in stopWords) and (nw2 not in stopWords):
+            NBigrams.append(nw1+'_'+nw2)
+            SBigrams.append(sw1+'_'+nw2)
+    return SBigrams, NBigrams
+
+def pymorphy2_built_threegrams(WordsTags, SWords, SThreegrams, NThreegrams, stopWords):
+    for i in range(2, len(WordsTags)):
+        nw1 = WordsTags[i-2][0]
+        nw2 = WordsTags[i-1][0]
+        nw3 = WordsTags[i][0]
+        #sw1 = SWords[i-2]
+        #sw2 = SWords[i-1]
+        sw3 = SWords[i]
+        t1 = WordsTags[i-2][1]
+        t2 = WordsTags[i-1][1]
+        t3 = WordsTags[i][1]
+        if (t1 == 'NOUN') and ((t2 == 'CCONJ') or (t2 == 'PREP')) and (t3 == 'NOUN') and (nw1 not in stopWords) and (nw3 not in stopWords):
+            NThreegrams.append(nw1+'_'+nw2+'_'+nw3)
+            SThreegrams.append(nw1+'_'+nw2+'_'+sw3)
+        elif (t1 == 'ADJF') and (t2 == 'ADJF') and (t3 == 'NOUN') and (nw1 not in stopWords) and (nw2 not in stopWords) and (nw3 not in stopWords):
+            NThreegrams.append(nw1+'_'+nw2+'_'+nw3)
+            SThreegrams.append(nw1+'_'+nw2+'_'+sw3)
+    return SThreegrams, NThreegrams
+
+def pymorphy2_nlp(text, nlpModel, stopWords):
     SWords =[]
+    SBigrams = []
+    SThreegrams = []
     Words = []
     Bigrams = []
     Threegrams = []
     sents = sent_tokenize(text)
     for sent in sents:
-        WordsTags, SWords, Words = built_words(sent, SWords, Words, nlpModel, stopWords)
+        WordsTags, SWords, Words = pymorphy2_built_words(sent, SWords, Words, nlpModel, stopWords)
         if len(WordsTags)>2:
-            Bigrams = built_bigrams(WordsTags, SWords, Bigrams, stopWords)
+            SBigrams, Bigrams = pymorphy2_built_bigrams(WordsTags, SWords, SBigrams, Bigrams, stopWords)
         if len(WordsTags)>3:
-            Threegrams = built_threegrams(WordsTags, SWords, Threegrams, stopWords)
-    return Words, Bigrams, Threegrams
-
+            SThreegrams, Threegrams = pymorphy2_built_threegrams(WordsTags, SWords, SThreegrams, Threegrams, stopWords)
+    return Words, SBigrams, Bigrams, SThreegrams, Threegrams
 
 def lang_detect(message, defaultLangs, nlpModels, stopWords):
     lidModel = fasttext.load_model('lid.176.ftz')

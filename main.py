@@ -24,13 +24,10 @@ packages = ['defaultConfigLoader', 'defaultModelsLoader', 'defaultSWsLoader', 't
 packagesInstaller.setup_packeges(packages)
 from __modules__ import defaultConfigLoader, defaultModelsLoader, defaultSWsLoader, textProcessor, termsRanker
 
-import time
-t0 = time.time()
-
 if __name__ == "__main__":
-    txtFileDir = sys.argv[1]
+    #txtFileDir = sys.argv[1]
     #if start script not in CMD mode than comemnt line above and recomment line below
-    #txtFileDir = '/Users/dmytrenko.o/Documents/GitHub/narrativesExtractor/datasets/otbor4.txt'
+    txtFileDir = '/Users/dmytrenko.o/Documents/GitHub/narrativesExtractor/datasets/otbor4.txt'
     #txtFileDir = '/Users/dmytrenko.o/Documents/GitHub/narrativesExtractor/datasets/20210126.txt'
     #txtFileDir = '/Users/dmytrenko.o/Documents/GitHub/narrativesExtractor/datasets/20210126_(2).txt'
     
@@ -56,9 +53,9 @@ if __name__ == "__main__":
                         continue
                     
                     if lang == 'uk':
-                        Words, Bigrams, Threegrams  = textProcessor.pymorphy_nlp(message, nlpModels[lang], defaultSWs[lang])    
+                        Words, SBigrams, Bigrams, SThreegrams, Threegrams  = textProcessor.pymorphy2_nlp(message, nlpModels[lang], defaultSWs[lang])    
                     elif lang == 'ru':
-                        Words, Bigrams, Threegrams  = textProcessor.pymorphy_nlp(message, nlpModels[lang], defaultSWs[lang])    
+                        Words, SBigrams, Bigrams, SThreegrams, Threegrams = textProcessor.pymorphy2_nlp(message, nlpModels[lang], defaultSWs[lang])    
                     else:
                         Words, Bigrams, Threegrams  = textProcessor.stanza_nlp(message, nlpModels[lang], defaultSWs[lang])    
     
