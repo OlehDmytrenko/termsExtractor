@@ -28,5 +28,4 @@ def setup_packeges(packages):
                 # implement pip as a subprocess:
                 subprocess.check_call([sys.executable, '-m', 'pip', 'install', package])
             except:
-                print ("Error while {0} installing!".format(package))
                 pass

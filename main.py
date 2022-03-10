@@ -13,6 +13,7 @@ Edited on Fri Mar  4 16:05:23 2022
 Edited on Sun Mar  6 03:35:18 2022
 Edited on Thu Mar  8 05:31:54 2022
 Edited on Wed Mar  9 05:33:45 2022
+Edited on Thu Mar 10 05:22:52 2022
 
 @author: Олег Дмитренко
 
@@ -31,15 +32,16 @@ if __name__ == "__main__":
     #if start script not in CMD mode than comemnt line above and recomment line below
     #txtFileDir = '/Users/dmytrenko.o/Documents/GitHub/narrativesExtractor/datasets/otbor4.txt'
     #txtFileDir = '/Users/dmytrenko.o/Documents/GitHub/narrativesExtractor/datasets/20210126.txt'
+    #txtFileDir = '/Users/dmytrenko.o/Documents/GitHub/narrativesExtractor/datasets/20210126_(2).txt'
     
     defaultLangs = defaultConfigLoader.load_default_languages()
     defaultSWs = defaultSWsLoader.load_default_stop_words(defaultLangs)
     nlpModels = defaultModelsLoader.load_default_models(defaultLangs)
     nGrams = defaultConfigLoader.load_default_ngrams()    
     
-    with open(txtFileDir, "r", encoding="utf-8") as file:
+    with open(txtFileDir, "r", encoding="utf-8") as inputFlow:
         message = ""
-        lines = (file.read().lower()).splitlines()
+        lines = (inputFlow.read().lower()).splitlines()
         for line in lines:
             message += (line + ' ')
             if line == '***':
@@ -50,7 +52,8 @@ if __name__ == "__main__":
                 
                     lang = textProcessor.lang_detect(message, defaultLangs, nlpModels, defaultSWs)
                     if (not defaultLangs[lang]):
-                       continue
+                        message = ""
+                        continue
                     
                     if lang == 'uk':
                         Words, Bigrams, Threegrams  = textProcessor.pymorphy_nlp(message, nlpModels[lang], defaultSWs[lang])    
@@ -59,7 +62,7 @@ if __name__ == "__main__":
                     else:
                         Words, Bigrams, Threegrams  = textProcessor.stanza_nlp(message, nlpModels[lang], defaultSWs[lang])    
     
-                    termsRanker.most_freq_key_terms(Words, Bigrams, Threegrams, 
+                    termsRanker.most_freq_key_terms(Words, Bigrams, Threegrams,
                                                     defaultConfigLoader.default_int_value('maxNumNarratives'))
                 message = ""
-
+        inputFlow.close()
