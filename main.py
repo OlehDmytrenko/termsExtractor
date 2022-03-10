@@ -25,9 +25,9 @@ packagesInstaller.setup_packeges(packages)
 from __modules__ import defaultConfigLoader, defaultModelsLoader, defaultSWsLoader, textProcessor, termsRanker
 
 if __name__ == "__main__":
-    txtFileDir = sys.argv[1]
+    #txtFileDir = sys.argv[1]
     #if start script not in CMD mode than comemnt line above and recomment line below
-    #txtFileDir = '/Users/dmytrenko.o/Documents/GitHub/narrativesExtractor/datasets/otbor4.txt'
+    txtFileDir = '/Users/dmytrenko.o/Documents/GitHub/narrativesExtractor/datasets/otbor4.txt'
     #txtFileDir = '/Users/dmytrenko.o/Documents/GitHub/narrativesExtractor/datasets/20210126.txt'
     #txtFileDir = '/Users/dmytrenko.o/Documents/GitHub/narrativesExtractor/datasets/20210126_(2).txt'
     
@@ -45,7 +45,7 @@ if __name__ == "__main__":
                 message = message[:-4]
                 if message:
                     print (message)
-                    message = (message.replace("\n"," "))[0:defaultConfigLoader.default_int_value('maxMessLength')] #delete all \n from input message              
+                    message = message[0:defaultConfigLoader.default_int_value('maxMessLength')]             
                     lang = textProcessor.lang_detect(message, defaultLangs, nlpModels, defaultSWs)
                     if (not defaultLangs[lang]):
                         message = ""
@@ -59,5 +59,6 @@ if __name__ == "__main__":
                         Words, Bigrams, Threegrams  = textProcessor.stanza_nlp(message, nlpModels[lang], defaultSWs[lang])    
                         termsRanker.stanza_most_freq_key_terms(Words, Bigrams, Threegrams,
                                                     defaultConfigLoader.default_int_value('maxNumNarratives'))
+                    
                 message = ""
         inputFlow.close()
