@@ -25,9 +25,9 @@ packagesInstaller.setup_packeges(packages)
 from __modules__ import defaultConfigLoader, defaultModelsLoader, defaultSWsLoader, textProcessor, termsRanker
 
 if __name__ == "__main__":
-    #txtFileDir = sys.argv[1]
+    txtFileDir = sys.argv[1]
     #if start script not in CMD mode than comemnt line above and recomment line below
-    txtFileDir = '/Users/dmytrenko.o/Documents/GitHub/narrativesExtractor/datasets/otbor4.txt'
+    #txtFileDir = '/Users/dmytrenko.o/Documents/GitHub/narrativesExtractor/datasets/otbor4.txt'
     #txtFileDir = '/Users/dmytrenko.o/Documents/GitHub/narrativesExtractor/datasets/20210126.txt'
     #txtFileDir = '/Users/dmytrenko.o/Documents/GitHub/narrativesExtractor/datasets/20210126_(2).txt'
     
