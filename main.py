@@ -29,7 +29,6 @@ if __name__ == "__main__":
     #if start script not in CMD mode than comemnt line above and recomment line below
     #txtFileDir = '/Users/dmytrenko.o/Documents/GitHub/narrativesExtractor/datasets/otbor4.txt'
     #txtFileDir = '/Users/dmytrenko.o/Documents/GitHub/narrativesExtractor/datasets/20210126.txt'
-    #txtFileDir = '/Users/dmytrenko.o/Documents/GitHub/narrativesExtractor/datasets/20210126_(2).txt'
     
     defaultLangs = defaultConfigLoader.load_default_languages()
     defaultSWs = defaultSWsLoader.load_default_stop_words(defaultLangs)
