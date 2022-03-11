@@ -80,9 +80,10 @@ def stanza_model_loader(defaultLangs, nlpModels, lang):
         print ("'{0}' language model for '{1}' package was downloaded successfully!".format(lang, defaultLangs[lang]))  
     except:
         print ("Error! '{0} 'language model for '{1}' package can not be dowloaded!".format(lang, defaultLangs[lang]))
-        print ("Russian 'Pymorphy2' model instead '{0}' is downloading as alternative...".format(defaultLangs[lang]))
-        print ("Russian 'Pymorphy2' model is loading...")
-        nlpModels = pymorphy2_model_loader(defaultLangs, nlpModels, 'ru')
+        print ("'ru' 'Pymorphy2' model instead '{0}' is downloading as alternative...".format(defaultLangs[lang]))
+        print ("ʼruʼ 'Pymorphy2' model is loading...")
+        nlpModels[lang] = pymorphy2_model_loader(defaultLangs, nlpModels, 'ru')
+        defaultLangs = textProcessor.append_lang(defaultLangs, lang, 'pymorphy2')
         return nlpModels
     try:
         nlpModels[lang] = stanza.Pipeline(lang, processors='tokenize,pos,lemma')

@@ -156,7 +156,9 @@ def lang_detect(message, defaultLangs, nlpModels, stopWords):
         except:
             return "uk"
     if (lang not in defaultLangs):
-        defaultLangs = append_lang(defaultLangs, lang, 'stanza')
-        nlpModels = defaultModelsLoader.stanza_model_loader(defaultLangs, nlpModels, lang)
+        try:
+            nlpModels = defaultModelsLoader.stanza_model_loader(defaultLangs, nlpModels, lang)
+        except:
+            return "uk"
         defaultSWsLoader.load_stop_words(defaultLangs, stopWords, lang)
     return lang

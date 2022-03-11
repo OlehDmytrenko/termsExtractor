@@ -24,7 +24,7 @@ from __modules__ import defaultConfigLoader, defaultModelsLoader, defaultSWsLoad
 if __name__ == "__main__":
     inputFilePath = sys.argv[1]
     outFileDir = sys.argv[2]
-    #if start script not in CMD mode than comemnt 2 line above and recomment 2 line below
+    #if start script in python compiler mode, 'spyder' for example, than comemnt 2 line above and recomment 2 line below
     #inputFileDir = '/Users/dmytrenko.o/Documents/GitHub/narrativesExtractor/datasets/otbor4.txt'
     #inputFilePath = '/Users/dmytrenko.o/Documents/GitHub/narrativesExtractor/datasets/20210126_.txt'
     #outFileDir = '/Users/dmytrenko.o/Documents/GitHub/narrativesExtractor/results/'
