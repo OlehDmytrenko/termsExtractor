@@ -8,11 +8,16 @@ Edited on Wed Mar  9 09:03:15 2022
 @author: Олег Дмитренко
 
 """      
+import sys
 from __modules__ import packagesInstaller
 packages = ['nltk']
 packagesInstaller.setup_packeges(packages)
 
 from nltk import FreqDist
+
+stdOutput = open("outlog.log", "a")
+sys.stderr = stdOutput
+sys.stdout = stdOutput
 
 def stanza_most_freq(keyTerms, top):
     mostFreqKeyTerms = ''
@@ -21,11 +26,13 @@ def stanza_most_freq(keyTerms, top):
         mostFreqKeyTerms = mostFreqKeyTerms + term  + ', ' 
     return mostFreqKeyTerms[:-2]
 
-def stanza_most_freq_key_terms(Words, Bigrams, Threegrams, top, outFlow):
-    outFlow.write(stanza_most_freq(Words,top)+'\n')
-    outFlow.write(stanza_most_freq(Bigrams, top)+'\n')
-    outFlow.write(stanza_most_freq(Threegrams,top)+'\n')
-    outFlow.write('***'+'\n')
+def stanza_most_freq_key_terms(Words, Bigrams, Threegrams, top):
+    sys.stdout = sys.__stdout__
+    print('<words>'+stanza_most_freq(Words,top)+'</words>')
+    print('<bigrams>'+stanza_most_freq(Bigrams, top)+'</bigrams>')
+    print('<threegrams>'+stanza_most_freq(Threegrams,top)+'</threegrams>')
+    print('***')
+    sys.stdout = stdOutput
     return
 
 def get_key(d, value):
@@ -40,11 +47,13 @@ def pymorphy2_most_freq(keyTerms, STerms, top):
         mostFreqKeyTerms = mostFreqKeyTerms + str(get_key(STerms, term))  + ', ' 
     return mostFreqKeyTerms[:-2]
 
-def pymorphy2_most_freq_key_terms(SWords, Words, SBigrams, Bigrams, SThreegrams, Threegrams, top, outFlow):
-    outFlow.write(pymorphy2_most_freq(Words, SWords, top)+'\n')
-    outFlow.write(pymorphy2_most_freq(Bigrams, SBigrams, top)+'\n')
-    outFlow.write(pymorphy2_most_freq(Threegrams, SThreegrams, top)+'\n')
-    outFlow.write('***'+'\n')
+def pymorphy2_most_freq_key_terms(SWords, Words, SBigrams, Bigrams, SThreegrams, Threegrams, top):
+    sys.stdout = sys.__stdout__
+    print('<words>'+pymorphy2_most_freq(Words, SWords, top)+'</words>')
+    print('<bigrams>'+pymorphy2_most_freq(Bigrams, SBigrams, top)+'</bigrams>')
+    print('<threegrams>'+pymorphy2_most_freq(Threegrams, SThreegrams, top)+'</threegrams>')
+    print('***')
+    sys.stdout = stdOutput
     return
 
 #def most_freq_key_terms_(nGrams, top):

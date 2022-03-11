@@ -11,6 +11,10 @@ import sys
 import importlib
 import subprocess
 
+stdOutput = open("outlog.log", "a")
+sys.stderr = stdOutput
+sys.stdout = stdOutput
+
 def setup_packeges(packages):
     for package in packages:
         if package in sys.modules:

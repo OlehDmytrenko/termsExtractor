@@ -23,18 +23,14 @@ from __modules__ import defaultConfigLoader, defaultModelsLoader, defaultSWsLoad
 
 if __name__ == "__main__":
     inputFilePath = sys.argv[1]
-    outFileDir = sys.argv[2]
     #if start script in python compiler mode, 'spyder' for example, than comemnt 2 line above and recomment 2 line below
     #inputFileDir = '/Users/dmytrenko.o/Documents/GitHub/narrativesExtractor/datasets/otbor4.txt'
     #inputFilePath = '/Users/dmytrenko.o/Documents/GitHub/narrativesExtractor/datasets/20210126_.txt'
     #outFileDir = '/Users/dmytrenko.o/Documents/GitHub/narrativesExtractor/results/'
-    outFileDir = os.getcwd()+outFileDir
-    if not os.path.exists(outFileDir):
-        print ("Directory {0} don't exist!".format(outFileDir))
-        print ("Creating {0} directory...".format(outFileDir))
-        os.mkdir(outFileDir)
-        print ("Directory {0} was created seccsesfuly!".format(outFileDir))
-    
+    stdOutput = open("outlog.log", "a")
+    sys.stderr = stdOutput
+    sys.stdout = stdOutput
+
     defaultLangs = defaultConfigLoader.load_default_languages()
     defaultSWs = defaultSWsLoader.load_default_stop_words(defaultLangs)
     nlpModels = defaultModelsLoader.load_default_models(defaultLangs)
@@ -44,33 +40,33 @@ if __name__ == "__main__":
         message = ""
         lines = (inputFlow.read().lower()).splitlines()
         for line in lines:
-            message += (line + ' ')
+            message += (line + '\n')
             if line == '***':
                 message = message[:-4]
                 if message:
-                    outFileName = os.path.basename(inputFilePath)
-                    with open(outFileDir+outFileName, "a", encoding="utf-8") as outFlow: 
-                        outFlow.write(message+'\n')
-                        message = message[0:defaultConfigLoader.default_int_value('maxMessLength')]             
-                        lang = textProcessor.lang_detect(message, defaultLangs, nlpModels, defaultSWs)
-                        if (not defaultLangs[lang]):
-                            message = ""
-                            continue
-                        if (defaultLangs[lang] == 'pymorphy2'):
-                            Words, SBigrams, Bigrams, SThreegrams, Threegrams  = textProcessor.pymorphy2_nlp(message, nlpModels[lang], defaultSWs[lang])    
-                            SWords = dict(list(zip(Words, Words)))
-                            termsRanker.pymorphy2_most_freq_key_terms(SWords, Words, SBigrams, Bigrams, SThreegrams, Threegrams,
-                                                        defaultConfigLoader.default_int_value('maxNumNarratives'), outFlow)
-                        elif (defaultLangs[lang] == 'stanza'):
-                            Words, Bigrams, Threegrams  = textProcessor.stanza_nlp(message, nlpModels[lang], defaultSWs[lang])    
-                            termsRanker.stanza_most_freq_key_terms(Words, Bigrams, Threegrams,
-                                                        defaultConfigLoader.default_int_value('maxNumNarratives'), outFlow)
-                        elif (not defaultLangs[lang]):
-                            Words, SBigrams, Bigrams, SThreegrams, Threegrams  = textProcessor.pymorphy2_nlp(message, nlpModels['uk'], defaultSWs['uk'])    
-                            SWords = dict(list(zip(Words, Words)))
-                            termsRanker.pymorphy2_most_freq_key_terms(SWords, Words, SBigrams, Bigrams, SThreegrams, Threegrams,
-                                                            defaultConfigLoader.default_int_value('maxNumNarratives'), outFlow)
-                    
+                    sys.stdout = sys.__stdout__
+                    print('<content>'+message+'</content>')
+                    sys.stdout = stdOutput
+                    message = message[0:defaultConfigLoader.default_int_value('maxMessLength')]             
+                    lang = textProcessor.lang_detect(message, defaultLangs, nlpModels, defaultSWs)
+                    if (not defaultLangs[lang]):
+                        message = ""
+                        continue
+                    if (defaultLangs[lang] == 'pymorphy2'):
+                        Words, SBigrams, Bigrams, SThreegrams, Threegrams  = textProcessor.pymorphy2_nlp(message, nlpModels[lang], defaultSWs[lang])    
+                        SWords = dict(list(zip(Words, Words)))
+                        termsRanker.pymorphy2_most_freq_key_terms(SWords, Words, SBigrams, Bigrams, SThreegrams, Threegrams,
+                                                    defaultConfigLoader.default_int_value('maxNumNarratives'))
+                    elif (defaultLangs[lang] == 'stanza'):
+                        Words, Bigrams, Threegrams  = textProcessor.stanza_nlp(message, nlpModels[lang], defaultSWs[lang])    
+                        termsRanker.stanza_most_freq_key_terms(Words, Bigrams, Threegrams,
+                                                    defaultConfigLoader.default_int_value('maxNumNarratives'))
+                    elif (not defaultLangs[lang]):
+                        Words, SBigrams, Bigrams, SThreegrams, Threegrams  = textProcessor.pymorphy2_nlp(message, nlpModels['uk'], defaultSWs['uk'])    
+                        SWords = dict(list(zip(Words, Words)))
+                        termsRanker.pymorphy2_most_freq_key_terms(SWords, Words, SBigrams, Bigrams, SThreegrams, Threegrams,
+                                                        defaultConfigLoader.default_int_value('maxNumNarratives'))
+                
                 message = ""
         inputFlow.close()
     print ("\nYou are lucky! The program successfully finished!\n")
