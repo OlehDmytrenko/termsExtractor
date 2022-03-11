@@ -132,8 +132,21 @@ def pymorphy2_nlp(text, nlpModel, stopWords):
             SThreegrams, Threegrams = pymorphy2_built_threegrams(WordsTags, SWords, SThreegrams, Threegrams, stopWords)
     return Words, SBigrams, Bigrams, SThreegrams, Threegrams
 
+def append_lang(defaultLangs, lang, package):
+    try:
+        defaultLangs[lang] = package
+        #with open(dir_below()+"/config.json", "w") as configFile:
+        #    try:
+        #    except:
+        #        pass
+        #    configFile.close()
+    except:
+        print ('Unexpected Error while adding new languade to default list <defaultLangs>!')
+    return defaultLangs
+
 def lang_detect(message, defaultLangs, nlpModels, stopWords):
     lidModel = fasttext.load_model('lid.176.ftz')
+    #Check if all the characters in the text are whitespaces
     if message.isspace():
         return 'uk'
     else:
@@ -142,7 +155,8 @@ def lang_detect(message, defaultLangs, nlpModels, stopWords):
             lang = lidModel.predict(message)[0][0].split("__label__")[1]
         except:
             return "uk"
-    if (lang not in defaultLangs) and (lang not in defaultLangs):
-        nlpModels = defaultModelsLoader.download_model(defaultLangs, nlpModels, lang)
+    if (lang not in defaultLangs):
+        defaultLangs = append_lang(defaultLangs, lang, 'stanza')
+        nlpModels = defaultModelsLoader.stanza_model_loader(defaultLangs, nlpModels, lang)
         defaultSWsLoader.load_stop_words(defaultLangs, stopWords, lang)
     return lang
