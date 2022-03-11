@@ -16,13 +16,17 @@ from __modules__ import packagesInstaller, textProcessor
 packages = ['subprocess', 'pymorphy2', 'nltk', 'spacy', 'stanza']
 packagesInstaller.setup_packeges(packages)
 
-import subprocess
+import subprocess, sys
 from pymorphy2 import MorphAnalyzer
 import nltk, spacy, stanza
 
+stdOutput = open("outlog.log", "a")
+sys.stderr = stdOutput
+sys.stdout = stdOutput
+
 def pymorphy2_model_loader(defaultLangs, nlpModels, lang):
     try:
-        subprocess.run('pip install -U pymorphy2-dicts-'+lang, shell=True)
+        subprocess.run("pip install -U pymorphy2-dicts-"+lang+"| grep -v 'already satisfied'", shell=True)
         print ("'{0}' language model for '{1}' package was downloaded successfully!".format(lang, defaultLangs[lang]))
     except:
         print ("Error! '{0}' language model for '{1}' package can not be dowloaded!".format(lang, defaultLangs[lang]))
@@ -55,12 +59,12 @@ def nltk_model_loader(defaultLangs, nlpModels, lang):
 
 def spacy_model_loader(defaultLangs, nlpModels, lang):
     try:
-        subprocess.run("python -m spacy download {0}_core_news_sm".format(lang), shell=True)
+        subprocess.run("python -m spacy download {0}_core_news_sm | grep -v 'already satisfied'".format(lang), shell=True)
         print ("'{0}' language model for '{1}' package was downloaded successfully!".format(lang, defaultLangs[lang]))     
     except:
         print ("Error! '{0}' language model for '{1}' package can not be dowloaded!".format(lang, defaultLangs[lang]))
         print ("Alternative {0} package downloading...".format(defaultLangs[lang]))
-        subprocess.run("python -m spacy download {0}_core_web_sm".format(lang), shell=True)
+        subprocess.run("python -m spacy download {0}_core_web_sm | grep -v 'already satisfied'".format(lang), shell=True)
         print ("'{0}' language model for '{1}' package was downloaded successfully!".format(lang, defaultLangs[lang]))
         pass
     try:
