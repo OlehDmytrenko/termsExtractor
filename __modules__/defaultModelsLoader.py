@@ -12,7 +12,7 @@ Edited on Wed Mar  9 07:33:55 2022
 
 """
 
-from __modules__ import packagesInstaller
+from __modules__ import packagesInstaller, textProcessor
 packages = ['subprocess', 'pymorphy2', 'nltk', 'spacy', 'stanza']
 packagesInstaller.setup_packeges(packages)
 
@@ -20,82 +20,77 @@ import subprocess
 from pymorphy2 import MorphAnalyzer
 import nltk, spacy, stanza
 
-def append_lang(defaultLangs, lang, package):
+def pymorphy2_model_loader(defaultLangs, nlpModels, lang):
     try:
-        defaultLangs[lang] = package
-        #with open(dir_below()+"/config.json", "w") as configFile:
-        #    try:
-        #    except:
-        #        pass
-        #    configFile.close()
+        subprocess.run('pip install -U pymorphy2-dicts-'+lang, shell=True)
+        print ("'{0}' language model for '{1}' package was downloaded successfully!".format(lang, defaultLangs[lang]))
     except:
-        print ('Unexpected Error while adding new languade to default list <defaultLangs>!')
-    return defaultLangs
+        print ("Error! '{0}' language model for '{1}' package can not be dowloaded!".format(lang, defaultLangs[lang]))
+        print ("There are no alternatives for {0} package downloading...".format(defaultLangs[lang]))
+        return
+    try:
+        nlpModels[lang] = MorphAnalyzer(lang = lang)
+        print ("'{0}' '{1}' model was loaded successfully!".format(lang, defaultLangs[lang]))    
+    except:
+        print ("Error! '{0}' language model for '{1}' package can not be loaded!".format(lang, defaultLangs[lang]))
+        return
+    return nlpModels
+ 
+def nltk_model_loader(defaultLangs, nlpModels, lang):
+    try:
+        nltk.download(lang)
+        print ("'{0}' language model for '{1}' package was downloaded successfully!".format(lang, defaultLangs[lang]))  
+    except:
+        print ("Error! '{0}' language model for '{1}' package can not be dowloaded!".format(lang, defaultLangs[lang]))
+        print ("There are no alternatives for {0} package downloading...".format(defaultLangs[lang]))
+        return
+    try:
+        #nltk.data.path('/Users/dmytrenko.o/nltk_data')
+        nlpModels[lang] = nltk
+        print ("'{0}' '{1}' model was loaded successfully!".format(lang, defaultLangs[lang]))
+    except:
+        print ("Error! '{0}' language model for '{1}' package can not be loaded!".format(lang, defaultLangs[lang]))
+        return
+    return nlpModels
 
-def download_model(defaultLangs, nlpModels, lang):
-    if (defaultLangs[lang] == "pymorphy2"):
-        try:
-            subprocess.run('pip install -U pymorphy2-dicts-'+lang, shell=True)
-            print ("'{0}' language model for '{1}' package was downloaded successfully!".format(lang, defaultLangs[lang]))
-        except:
-            print ("Error! '{0}' language model for '{1}' package can not be dowloaded!".format(lang, defaultLangs[lang]))
-            print ("There are no alternatives for {0} package downloading...".format(defaultLangs[lang]))
-            return
-        try:
-            nlpModels[lang] = MorphAnalyzer(lang = lang)
-            print ("'{0}' '{1}' model was loaded successfully!".format(lang, defaultLangs[lang]))    
-        except:
-            print ("Error! '{0}' language model for '{1}' package can not be loaded!".format(lang, defaultLangs[lang]))
-            return
-    elif (defaultLangs[lang] == "nltk"):
-        try:
-            nltk.download(lang)
-            print ("'{0}' language model for '{1}' package was downloaded successfully!".format(lang, defaultLangs[lang]))  
-        except:
-            print ("Error! '{0}' language model for '{1}' package can not be dowloaded!".format(lang, defaultLangs[lang]))
-            print ("There are no alternatives for {0} package downloading...".format(defaultLangs[lang]))
-            return
-        try:
-            #nltk.data.path('/path/to/nltk_data/')
-            #nlpModels[lang] = nltk
-            print ("'{0}' '{1}' model was loaded successfully!".format(lang, defaultLangs[lang]))
-        except:
-            print ("Error! '{0}' language model for '{1}' package can not be loaded!".format(lang, defaultLangs[lang]))
-            return
-    elif (defaultLangs[lang] == "spacy"):
-        try:
-            subprocess.run("python -m spacy download {0}_core_news_sm".format(lang), shell=True)
-            print ("'{0}' language model for '{1}' package was downloaded successfully!".format(lang, defaultLangs[lang]))     
-        except:
-            print ("Error! '{0}' language model for '{1}' package can not be dowloaded!".format(lang, defaultLangs[lang]))
-            print ("Alternative {0} package downloading...".format(defaultLangs[lang]))
-            subprocess.run("python -m spacy download {0}_core_web_sm".format(lang), shell=True)
-            print ("'{0}' language model for '{1}' package was downloaded successfully!".format(lang, defaultLangs[lang]))
-            pass
-        try:
-            nlpModels[lang] = spacy.load(lang+"_core_web_sm")
-            print ("'{0}' '{1}' model was loaded successfully!".format(lang, defaultLangs[lang]))
-        except:
-            print ("Error! '{0}' language model for '{1}' package can not be loaded!".format(lang, defaultLangs[lang]))
-            print ("Alternative {0} package loading...".format(defaultLangs[lang]))
-            nlpModels[lang] = spacy.load(lang+"_core_news_sm")
-            print ("'{0}' '{1}' model was loaded successfully!".format(lang, defaultLangs[lang]))
-            pass
-    elif (defaultLangs[lang] == "stanza"):
-        try:
-            stanza.download(lang)
-            print ("'{0}' language model for '{1}' package was downloaded successfully!".format(lang, defaultLangs[lang]))  
-        except:
-            print ("Error! '{0} 'language model for '{1}' package can not be dowloaded!".format(lang, defaultLangs[lang]))
-            print ("There are no alternatives for {0} package downloading...".format(defaultLangs[lang]))
-            return
-        try:
-            nlpModels[lang] = stanza.Pipeline(lang, processors='tokenize,pos,lemma')
-            print ("'{0}' '{1}' model was loaded successfully!".format(lang, defaultLangs[lang]))
-        except:
-            print ("Error! '{0}' language model for '{1}' package can not be loaded!".format(lang, defaultLangs[lang]))
-            print ("There are no alternatives for {0} package loading...".format(defaultLangs[lang]))
-            pass
+def spacy_model_loader(defaultLangs, nlpModels, lang):
+    try:
+        subprocess.run("python -m spacy download {0}_core_news_sm".format(lang), shell=True)
+        print ("'{0}' language model for '{1}' package was downloaded successfully!".format(lang, defaultLangs[lang]))     
+    except:
+        print ("Error! '{0}' language model for '{1}' package can not be dowloaded!".format(lang, defaultLangs[lang]))
+        print ("Alternative {0} package downloading...".format(defaultLangs[lang]))
+        subprocess.run("python -m spacy download {0}_core_web_sm".format(lang), shell=True)
+        print ("'{0}' language model for '{1}' package was downloaded successfully!".format(lang, defaultLangs[lang]))
+        pass
+    try:
+        nlpModels[lang] = spacy.load(lang+"_core_web_sm")
+        print ("'{0}' '{1}' model was loaded successfully!".format(lang, defaultLangs[lang]))
+    except:
+        print ("Error! '{0}' language model for '{1}' package can not be loaded!".format(lang, defaultLangs[lang]))
+        print ("Alternative {0} package loading...".format(defaultLangs[lang]))
+        nlpModels[lang] = spacy.load(lang+"_core_news_sm")
+        print ("'{0}' '{1}' model was loaded successfully!".format(lang, defaultLangs[lang]))
+        pass
+    return nlpModels
+
+def stanza_model_loader(defaultLangs, nlpModels, lang):
+    try:
+        stanza.download(lang)
+        print ("'{0}' language model for '{1}' package was downloaded successfully!".format(lang, defaultLangs[lang]))  
+    except:
+        print ("Error! '{0} 'language model for '{1}' package can not be dowloaded!".format(lang, defaultLangs[lang]))
+        print ("Russian 'Pymorphy2' model instead '{0}' is downloading as alternative...".format(defaultLangs[lang]))
+        print ("Russian 'Pymorphy2' model is loading...")
+        nlpModels = pymorphy2_model_loader(defaultLangs, nlpModels, 'ru')
+        return nlpModels
+    try:
+        nlpModels[lang] = stanza.Pipeline(lang, processors='tokenize,pos,lemma')
+        print ("'{0}' '{1}' model was loaded successfully!".format(lang, defaultLangs[lang]))
+    except:
+        print ("Error! '{0}' language model for '{1}' package can not be loaded!".format(lang, defaultLangs[lang]))
+        print ("There are no alternatives for {0} package loading...".format(defaultLangs[lang]))
+        pass
     return nlpModels
 
 def load_default_models(defaultLangs):
@@ -104,68 +99,13 @@ def load_default_models(defaultLangs):
     if defaultLangs:
         for lang in defaultLangs.keys():
             if (defaultLangs[lang] == "pymorphy2"):
-                try:
-                    subprocess.run('pip install -U pymorphy2-dicts-'+lang, shell=True)
-                    print ("'{0}' language model for '{1}' package was downloaded successfully!".format(lang, defaultLangs[lang]))
-                except:
-                    print ("Error! '{0}' language model for '{1}' package can not be dowloaded!".format(lang, defaultLangs[lang]))
-                    print ("There are no alternatives for {0} package downloading...".format(defaultLangs[lang]))
-                    return
-                try:
-                    nlpModels[lang] = MorphAnalyzer(lang = lang)
-                    print ("'{0}' '{1}' model was loaded successfully!".format(lang, defaultLangs[lang]))    
-                except:
-                    print ("Error! '{0}' language model for '{1}' package can not be loaded!".format(lang, defaultLangs[lang]))
-                    return
+                nlpModels = pymorphy2_model_loader(defaultLangs, nlpModels, lang)
             elif (defaultLangs[lang] == "nltk"):
-                try:
-                    nltk.download(lang)
-                    print ("'{0}' language model for '{1}' package was downloaded successfully!".format(lang, defaultLangs[lang]))  
-                except:
-                    print ("Error! '{0}' language model for '{1}' package can not be dowloaded!".format(lang, defaultLangs[lang]))
-                    print ("There are no alternatives for {0} package downloading...".format(defaultLangs[lang]))
-                    return
-                try:
-                    #nltk.data.path('/Users/dmytrenko.o/nltk_data')
-                    nlpModels[lang] = nltk
-                    print ("'{0}' '{1}' model was loaded successfully!".format(lang, defaultLangs[lang]))
-                except:
-                    print ("Error! '{0}' language model for '{1}' package can not be loaded!".format(lang, defaultLangs[lang]))
-                    return
+                nlpModels = nltk_model_loader(defaultLangs, nlpModels, lang)
             elif (defaultLangs[lang] == "spacy"):
-                try:
-                    subprocess.run("python -m spacy download {0}_core_news_sm".format(lang), shell=True)
-                    print ("'{0}' language model for '{1}' package was downloaded successfully!".format(lang, defaultLangs[lang]))     
-                except:
-                    print ("Error! '{0}' language model for '{1}' package can not be dowloaded!".format(lang, defaultLangs[lang]))
-                    print ("Alternative {0} package downloading...".format(defaultLangs[lang]))
-                    subprocess.run("python -m spacy download {0}_core_web_sm".format(lang), shell=True)
-                    print ("'{0}' language model for '{1}' package was downloaded successfully!".format(lang, defaultLangs[lang]))
-                    pass
-                try:
-                    nlpModels[lang] = spacy.load(lang+"_core_web_sm")
-                    print ("'{0}' '{1}' model was loaded successfully!".format(lang, defaultLangs[lang]))
-                except:
-                    print ("Error! '{0}' language model for '{1}' package can not be loaded!".format(lang, defaultLangs[lang]))
-                    print ("Alternative {0} package loading...".format(defaultLangs[lang]))
-                    nlpModels[lang] = spacy.load(lang+"_core_news_sm")
-                    print ("'{0}' '{1}' model was loaded successfully!".format(lang, defaultLangs[lang]))
-                    pass
+                nlpModels = spacy_model_loader(defaultLangs, nlpModels, lang)
             elif (defaultLangs[lang] == "stanza"):
-                try:
-                    stanza.download(lang)
-                    print ("'{0}' language model for '{1}' package was downloaded successfully!".format(lang, defaultLangs[lang]))  
-                except:
-                    print ("Error! '{0} 'language model for '{1}' package can not be dowloaded!".format(lang, defaultLangs[lang]))
-                    print ("There are no alternatives for {0} package downloading...".format(defaultLangs[lang]))
-                    return
-                try:
-                    nlpModels[lang] = stanza.Pipeline(lang, processors='tokenize,pos,lemma')
-                    print ("'{0}' '{1}' model was loaded successfully!".format(lang, defaultLangs[lang]))
-                except:
-                    print ("Error! '{0}' language model for '{1}' package can not be loaded!".format(lang, defaultLangs[lang]))
-                    print ("There are no alternatives for {0} package loading...".format(defaultLangs[lang]))
-                    pass
+                nlpModels = stanza_model_loader(defaultLangs, nlpModels, lang)
     else:
         print('The <defaultLangs> list is empty!')
         print("""Please, enter below at least one language and package name for language model downloading !
@@ -173,6 +113,6 @@ def load_default_models(defaultLangs):
               and corresponded packages for language models dowmloading availаble at https://pymorphy2.readthedocs.io/en/stable/index.html,
               https://www.nltk.org/book/ch05.html, https://spacy.io/models, https://stanfordnlp.github.io/stanza/available_models.html""")
         lang, package = input().split(":")
-        defaultLangs = append_lang(defaultLangs, lang, package)
+        defaultLangs = textProcessor.append_lang(defaultLangs, lang, package)
         nlpModels = load_default_models(defaultLangs)
     return nlpModels

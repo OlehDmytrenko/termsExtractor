@@ -21,11 +21,11 @@ def stanza_most_freq(keyTerms, top):
         mostFreqKeyTerms = mostFreqKeyTerms + term  + ', ' 
     return mostFreqKeyTerms[:-2]
 
-def stanza_most_freq_key_terms(Words, Bigrams, Threegrams, top):
-    print (stanza_most_freq(Words,top))
-    print (stanza_most_freq(Bigrams, top))
-    print (stanza_most_freq(Threegrams,top))
-    print ('***')
+def stanza_most_freq_key_terms(Words, Bigrams, Threegrams, top, outFlow):
+    outFlow.write(stanza_most_freq(Words,top)+'\n')
+    outFlow.write(stanza_most_freq(Bigrams, top)+'\n')
+    outFlow.write(stanza_most_freq(Threegrams,top)+'\n')
+    outFlow.write('***'+'\n')
     return
 
 def get_key(d, value):
@@ -40,11 +40,11 @@ def pymorphy2_most_freq(keyTerms, STerms, top):
         mostFreqKeyTerms = mostFreqKeyTerms + str(get_key(STerms, term))  + ', ' 
     return mostFreqKeyTerms[:-2]
 
-def pymorphy2_most_freq_key_terms(SWords, Words, SBigrams, Bigrams, SThreegrams, Threegrams, top):
-    print (pymorphy2_most_freq(Words, SWords, top))
-    print (pymorphy2_most_freq(Bigrams, SBigrams, top))
-    print (pymorphy2_most_freq(Threegrams, SThreegrams, top))
-    print ('***')
+def pymorphy2_most_freq_key_terms(SWords, Words, SBigrams, Bigrams, SThreegrams, Threegrams, top, outFlow):
+    outFlow.write(pymorphy2_most_freq(Words, SWords, top)+'\n')
+    outFlow.write(pymorphy2_most_freq(Bigrams, SBigrams, top)+'\n')
+    outFlow.write(pymorphy2_most_freq(Threegrams, SThreegrams, top)+'\n')
+    outFlow.write('***'+'\n')
     return
 
 #def most_freq_key_terms_(nGrams, top):

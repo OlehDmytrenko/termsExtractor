@@ -11,7 +11,7 @@ Edited on Wed Mar  9 07:39:23 2022
 @author: Олег Дмитренко
 
 """
-from __modules__ import packagesInstaller
+from __modules__ import packagesInstaller, textProcessor
 packages = ['os', 'io', 'stop_words']
 packagesInstaller.setup_packeges(packages)
 
@@ -31,17 +31,6 @@ def load_stop_words(defaultLangs, defaultSWs, lang):
         return defaultSWs   
     return defaultSWs
 
-def append_lang(defaultLangs, lang, package):
-    try:
-        defaultLangs[lang] = package
-        #with open(dir_below()+"/config.json", "w") as configFile:
-        #    try:
-        #    except:
-        #        pass
-        #    configFile.close()
-    except:
-        print ('Unexpected Error while adding new languade to default list <defaultLangs>!')
-    return defaultLangs
 
 def load_default_stop_words(defaultLangs):
     defaultSWs = dict()
@@ -65,6 +54,6 @@ def load_default_stop_words(defaultLangs):
               and corresponded packages for language models dowmloading availаble at https://pymorphy2.readthedocs.io/en/stable/index.html,
               https://www.nltk.org/book/ch05.html, https://spacy.io/models, https://stanfordnlp.github.io/stanza/available_models.html""")
         lang, package = input().split(":")
-        defaultLangs = append_lang(defaultLangs, lang, package)
+        defaultLangs = textProcessor.append_lang(defaultLangs, lang, package)
         defaultSWs = load_stop_words(defaultLangs, defaultSWs, lang)
     return defaultSWs
