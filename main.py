@@ -28,6 +28,7 @@ if __name__ == "__main__":
     #inputFileDir = '/Users/dmytrenko.o/Documents/GitHub/narrativesExtractor/datasets/otbor4.txt'
     #inputFilePath = '/Users/dmytrenko.o/Documents/GitHub/narrativesExtractor/datasets/20210126_.txt'
     #outFileDir = '/Users/dmytrenko.o/Documents/GitHub/narrativesExtractor/results/'
+    outFileDir = os.getcwd()+outFileDir
     if not os.path.exists(outFileDir):
         print ("Directory {0} don't exist!".format(outFileDir))
         print ("Creating {0} directory...".format(outFileDir))
@@ -72,4 +73,4 @@ if __name__ == "__main__":
                     
                 message = ""
         inputFlow.close()
-    print ("\nSuccessfully finished!")
+    print ("\nYou are lucky! The program successfully finished!\n")

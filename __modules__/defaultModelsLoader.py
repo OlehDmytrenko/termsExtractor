@@ -80,9 +80,9 @@ def stanza_model_loader(defaultLangs, nlpModels, lang):
         print ("'{0}' language model for '{1}' package was downloaded successfully!".format(lang, defaultLangs[lang]))  
     except:
         print ("Error! '{0} 'language model for '{1}' package can not be dowloaded!".format(lang, defaultLangs[lang]))
-        print ("'ru' 'Pymorphy2' model instead '{0}' is downloading as alternative...".format(defaultLangs[lang]))
-        print ("ʼruʼ 'Pymorphy2' model is loading...")
-        nlpModels[lang] = pymorphy2_model_loader(defaultLangs, nlpModels, 'ru')
+        print ("'uk' 'Pymorphy2' model instead '{0}' is downloading as alternative...".format(defaultLangs[lang]))
+        print ("ʼukʼ 'Pymorphy2' model is loading...")
+        nlpModels[lang] = pymorphy2_model_loader(defaultLangs, nlpModels, 'uk')
         defaultLangs = textProcessor.append_lang(defaultLangs, lang, 'pymorphy2')
         return nlpModels
     try:

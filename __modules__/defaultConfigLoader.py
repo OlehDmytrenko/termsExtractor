@@ -55,8 +55,7 @@ def load_default_languages():
             configFile.close()
     except:
         print ("Error! Default languages can't be reading! Please, check a field {0} in config.json".format("langConfig"))
-        defaultLangs = {"uk": "pymorphy2", "ru": "pymorphy2", "en": "nltk", "de": "spacy",
-                        "he": "stanza", "zh": "spacy", "kv": "", "tl": "", "bcl": "",
+        defaultLangs = {"uk": "pymorphy2", "ru": "pymorphy2", "en" : "stanza", "kv": "", "tl": "", "bcl": "",
                         "xal": "", "ba": "", "ga": ""}
         pass
     return defaultLangs
