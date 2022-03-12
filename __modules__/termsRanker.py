@@ -40,19 +40,21 @@ def get_key(d, value):
         if v == value:
             return k
 
-def pymorphy2_most_freq(keyTerms, STerms, top):
+def pymorphy2_most_freq(STerms, keyTerms, top):
     mostFreqKeyTerms = ''
     fdist = FreqDist(word.lower() for word in keyTerms)
     for (term, freq) in fdist.most_common(top):
         mostFreqKeyTerms = mostFreqKeyTerms + str(get_key(STerms, term))  + ', ' 
     return mostFreqKeyTerms[:-2]
 
-def pymorphy2_most_freq_key_terms(SWords, Words, SBigrams, Bigrams, SThreegrams, Threegrams, top):
+def pymorphy2_most_freq_key_terms(Terms, nGrams, top):
     sys.stdout = sys.__stdout__
-    print('<words>'+pymorphy2_most_freq(Words, SWords, top)+'</words>')
-    print('<bigrams>'+pymorphy2_most_freq(Bigrams, SBigrams, top)+'</bigrams>')
-    print('<threegrams>'+pymorphy2_most_freq(Threegrams, SThreegrams, top)+'</threegrams>')
-    print('***')
+    for i in nGrams:
+         print('<'+nGrams[i]+'>'+pymorphy2_most_freq(Terms[int(i)-1][1], Terms[int(i)-1][2], top)+'</'+nGrams[i]+'>')  
+    #print('<words>'+pymorphy2_most_freq(Words[1], Words[2], top)+'</words>')
+    #print('<bigrams>'+pymorphy2_most_freq(Bigrams[1], Bigrams[2], top)+'</bigrams>')
+    #print('<threegrams>'+pymorphy2_most_freq(Threegrams[1], Threegrams[2], top)+'</threegrams>')
+    #print('***')
     sys.stdout = stdOutput
     return
 
