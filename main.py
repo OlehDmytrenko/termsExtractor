@@ -18,7 +18,7 @@ Edited on Thu Mar 10 05:22:52 2022
 @author: Олег Дмитренко
 
 """
-import sys, os
+import sys
 from __modules__ import defaultConfigLoader, defaultModelsLoader, defaultSWsLoader, textProcessor, termsRanker
 
 if __name__ == "__main__":

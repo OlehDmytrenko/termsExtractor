@@ -16,13 +16,9 @@ from __modules__ import packagesInstaller, textProcessor
 packages = ['subprocess', 'pymorphy2', 'nltk', 'spacy', 'stanza']
 packagesInstaller.setup_packeges(packages)
 
-import subprocess, sys
+import subprocess
 from pymorphy2 import MorphAnalyzer
 import nltk, spacy, stanza
-
-stdOutput = open("outlog.log", "a")
-sys.stderr = stdOutput
-sys.stdout = stdOutput
 
 def pymorphy2_model_loader(defaultLangs, nlpModels, lang):
     try:

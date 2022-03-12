@@ -14,14 +14,10 @@ from __modules__ import packagesInstaller
 packages = ['fasttext', 'nltk']
 packagesInstaller.setup_packeges(packages)
 
-import fasttext, sys
+import fasttext
 from nltk.tokenize import sent_tokenize
 from nltk.tokenize import word_tokenize
 from __modules__ import defaultModelsLoader, defaultSWsLoader
-
-stdOutput = open("outlog.log", "a")
-sys.stderr = stdOutput
-sys.stdout = stdOutput
 
 def stanza_built_words(sent, Words, stopWords):
     WordsTags = []
