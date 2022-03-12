@@ -54,7 +54,7 @@ def pymorphy2_most_freq_key_terms(Terms, nGrams, top):
     #print('<words>'+pymorphy2_most_freq(Words[1], Words[2], top)+'</words>')
     #print('<bigrams>'+pymorphy2_most_freq(Bigrams[1], Bigrams[2], top)+'</bigrams>')
     #print('<threegrams>'+pymorphy2_most_freq(Threegrams[1], Threegrams[2], top)+'</threegrams>')
-    #print('***')
+    print('***')
     sys.stdout = stdOutput
     return
 
