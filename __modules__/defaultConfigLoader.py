@@ -59,4 +59,3 @@ def load_default_languages():
                         "xal": "", "ba": "", "ga": ""}
         pass
     return defaultLangs
-

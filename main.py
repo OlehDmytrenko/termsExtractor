@@ -34,7 +34,7 @@ if __name__ == "__main__":
     defaultLangs = defaultConfigLoader.load_default_languages()
     defaultSWs = defaultSWsLoader.load_default_stop_words(defaultLangs)
     nlpModels = defaultModelsLoader.load_default_models(defaultLangs)
-    nGrams = defaultConfigLoader.load_default_ngrams()    
+    nGrams = defaultConfigLoader.load_default_ngrams()
     
     with open(inputFilePath, "r", encoding="utf-8") as inputFlow:
         message = ""
@@ -53,19 +53,17 @@ if __name__ == "__main__":
                         message = ""
                         continue
                     if (defaultLangs[lang] == 'pymorphy2'):
-                        Words, SBigrams, Bigrams, SThreegrams, Threegrams  = textProcessor.pymorphy2_nlp(message, nlpModels[lang], defaultSWs[lang])    
-                        SWords = dict(list(zip(Words, Words)))
-                        termsRanker.pymorphy2_most_freq_key_terms(SWords, Words, SBigrams, Bigrams, SThreegrams, Threegrams,
-                                                    defaultConfigLoader.default_int_value('maxNumNarratives'))
+                        Words, Bigrams, Threegrams = textProcessor.pymorphy2_nlp(message, nlpModels[lang], defaultSWs[lang])
+                        termsRanker.pymorphy2_most_freq_key_terms((Words, Bigrams, Threegrams), nGrams, 
+                                                                  defaultConfigLoader.default_int_value('maxNumNarratives'))
                     elif (defaultLangs[lang] == 'stanza'):
-                        Words, Bigrams, Threegrams  = textProcessor.stanza_nlp(message, nlpModels[lang], defaultSWs[lang])    
-                        termsRanker.stanza_most_freq_key_terms(Words, Bigrams, Threegrams,
-                                                    defaultConfigLoader.default_int_value('maxNumNarratives'))
+                        NWords, NBigrams, Threegrams  = textProcessor.stanza_nlp(message, nlpModels[lang], defaultSWs[lang])    
+                        termsRanker.stanza_most_freq_key_terms(NWords, NBigrams, Threegrams,
+                                                    nGrams, defaultConfigLoader.default_int_value('maxNumNarratives'))
                     elif (not defaultLangs[lang]):
-                        Words, SBigrams, Bigrams, SThreegrams, Threegrams  = textProcessor.pymorphy2_nlp(message, nlpModels['uk'], defaultSWs['uk'])    
-                        SWords = dict(list(zip(Words, Words)))
-                        termsRanker.pymorphy2_most_freq_key_terms(SWords, Words, SBigrams, Bigrams, SThreegrams, Threegrams,
-                                                        defaultConfigLoader.default_int_value('maxNumNarratives'))
+                        Words, Bigrams, Threegrams = textProcessor.pymorphy2_nlp(message, nlpModels['uk'], defaultSWs['uk'])    
+                        termsRanker.pymorphy2_most_freq_key_terms((Words, Bigrams, Threegrams), nGrams,
+                                                                  defaultConfigLoader.default_int_value('maxNumNarratives'))
                 
                 message = ""
         inputFlow.close()
