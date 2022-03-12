@@ -38,7 +38,7 @@ if __name__ == "__main__":
     
     with open(inputFilePath, "r", encoding="utf-8") as inputFlow:
         message = ""
-        lines = (inputFlow.read().lower()).splitlines()
+        lines = (inputFlow.read()).splitlines()
         for line in lines:
             message += (line + '\n')
             if line == '***':
@@ -47,7 +47,7 @@ if __name__ == "__main__":
                     sys.stdout = sys.__stdout__
                     print('<content>'+message+'</content>')
                     sys.stdout = stdOutput
-                    message = message[0:defaultConfigLoader.default_int_value('maxMessLength')]             
+                    message = message[0:defaultConfigLoader.default_int_value('maxMessLength')].lower()            
                     lang = textProcessor.lang_detect(message, defaultLangs, nlpModels, defaultSWs)
                     if (not defaultLangs[lang]):
                         message = ""
