@@ -15,12 +15,8 @@ from __modules__ import packagesInstaller, textProcessor
 packages = ['os', 'io', 'stop_words']
 packagesInstaller.setup_packeges(packages)
 
-import os, io, sys
+import os, io
 from stop_words import safe_get_stop_words
-
-stdOutput = open("outlog.log", "a")
-sys.stderr = stdOutput
-sys.stdout = stdOutput
 
 def load_stop_words(defaultLangs, defaultSWs, lang):
     if os.path.isfile(lang+'.txt'):

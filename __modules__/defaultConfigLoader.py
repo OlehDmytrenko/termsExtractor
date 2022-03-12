@@ -6,16 +6,12 @@ Edited on Wed Mar  9 05:38:58 2022
 
 @author: dmytrenko.o
 """
-import os, sys
+import os
 from __modules__ import packagesInstaller
 packages = ['json']
 packagesInstaller.setup_packeges(packages)
 
 import json
-
-stdOutput = open("outlog.log", "a")
-sys.stderr = stdOutput
-sys.stdout = stdOutput
 
 def dir_below():
     curFolder = os.path.abspath(os.getcwd()).replace(os.path.dirname(os.path.abspath(os.curdir)),"")
