@@ -30,7 +30,7 @@ def load_default_ngrams():
             configFile.close()
     except:
         print ("Error! Ngrams can't be reading! Please, check a field {0} in config.json".format("ngrams"))
-        ngrams = {"1" : "words", "2" : "bigrams", "3" : "threegrams"}
+        ngrams = {"1" : "Words", "2" : "Bigrams", "3" : "Threegrams"}
     return ngrams
 
 def default_int_value(key):

@@ -21,6 +21,9 @@ Edited on Thu Mar 10 05:22:52 2022
 import sys
 from __modules__ import defaultConfigLoader, defaultModelsLoader, defaultSWsLoader, textProcessor, termsRanker
 
+import time
+t0 = time.time()
+
 if __name__ == "__main__":
     inputFilePath = sys.argv[1]
     #if start script in python compiler mode, 'spyder' for example, than comemnt 2 line above and recomment 2 line below
@@ -53,18 +56,23 @@ if __name__ == "__main__":
                         message = ""
                         continue
                     if (defaultLangs[lang] == 'pymorphy2'):
-                        Words, Bigrams, Threegrams = textProcessor.pymorphy2_nlp(message, nlpModels[lang], defaultSWs[lang])
-                        termsRanker.pymorphy2_most_freq_key_terms((Words, Bigrams, Threegrams), nGrams, 
+                        dictTerms = textProcessor.pymorphy2_nlp(message, nlpModels[lang], defaultSWs[lang], nGrams)
+                        Terms = dict(zip(nGrams.keys(),[dictTerms[i] for i in nGrams]))
+                        termsRanker.pymorphy2_most_freq_key_terms(Terms, nGrams,
                                                                   defaultConfigLoader.default_int_value('maxNumNarratives'))
                     elif (defaultLangs[lang] == 'stanza'):
-                        NWords, NBigrams, Threegrams  = textProcessor.stanza_nlp(message, nlpModels[lang], defaultSWs[lang])    
-                        termsRanker.stanza_most_freq_key_terms(NWords, NBigrams, Threegrams,
-                                                    nGrams, defaultConfigLoader.default_int_value('maxNumNarratives'))
+                        dictNTerms  = textProcessor.stanza_nlp(message, nlpModels[lang], defaultSWs[lang], nGrams)    
+                        NTerms = dict(zip(nGrams.keys(),[dictNTerms[i] for i in nGrams]))
+                        termsRanker.stanza_most_freq_key_terms(NTerms, nGrams,
+                                                               defaultConfigLoader.default_int_value('maxNumNarratives'))
                     elif (not defaultLangs[lang]):
-                        Words, Bigrams, Threegrams = textProcessor.pymorphy2_nlp(message, nlpModels['uk'], defaultSWs['uk'])    
-                        termsRanker.pymorphy2_most_freq_key_terms((Words, Bigrams, Threegrams), nGrams,
+                        dictTerms = textProcessor.pymorphy2_nlp(message, nlpModels['uk'], defaultSWs['uk'], nGrams)    
+                        Terms = dict(zip(nGrams.keys(),[dictTerms[i] for i in nGrams]))
+                        termsRanker.pymorphy2_most_freq_key_terms(Terms, nGrams,
                                                                   defaultConfigLoader.default_int_value('maxNumNarratives'))
                 
                 message = ""
         inputFlow.close()
     print ("\nYou are lucky! The program successfully finished!\n")
+    print (time.time() - t0)
+    

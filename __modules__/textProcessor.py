@@ -52,10 +52,10 @@ def stanza_built_threegrams(WordsTags, NThreegrams, stopWords):
         if (t1 == 'NOUN') and ((t2 == 'CCONJ') or (t2 == 'ADP')) and (t3 == 'NOUN') and (w1 not in stopWords) and (w3 not in stopWords):
             NThreegrams.append(w1+'_'+w2+'_'+w3)
         elif (t1 == 'ADJ') and (t2 == 'ADJ') and (t3 == 'NOUN') and (w1 not in stopWords) and (w2 not in stopWords) and (w3 not in stopWords):
-            NThreegrams.append(w1+'_'+w2+'_'+w3)
+            NThreegrams.append(w1+'_'+w2+'_'+w3)    
     return NThreegrams
 
-def stanza_nlp(text, nlpModel, stopWords):
+def stanza_nlp(text, nlpModel, stopWords, nGrams):
     NWords = []
     NBigrams = []
     NThreegrams = []
@@ -63,11 +63,11 @@ def stanza_nlp(text, nlpModel, stopWords):
     sents = doc.sentences
     for sent in sents:
         WordsTags, NWords = stanza_built_words(sent, NWords, stopWords)
-        if len(WordsTags)>2:
+        if ('Bigrams' in nGrams.values()) and (len(WordsTags)>2):
             NBigrams = stanza_built_bigrams(WordsTags, NBigrams, stopWords)
-        if len(WordsTags)>3:
+        if ('Threegrams' in nGrams.values()) and (len(WordsTags)>3):
             NThreegrams = stanza_built_threegrams(WordsTags, NThreegrams, stopWords)
-    return NWords, NBigrams, NThreegrams
+    return {"1" : NWords, "2" : NBigrams, "3" : NThreegrams}
 
 def pymorphy2_built_words(sent, Words, NWords, nlpModel, stopWords):
     WordsTags = []
@@ -118,7 +118,7 @@ def pymorphy2_built_threegrams(WordsTags, Words, Threegrams, SThreegrams, NThree
             Threegrams[w1+'_'+w2+'_'+w3] = nw1+'_'+nw2+'_'+nw3
     return Threegrams, SThreegrams, NThreegrams
 
-def pymorphy2_nlp(text, nlpModel, stopWords):
+def pymorphy2_nlp(text, nlpModel, stopWords, nGrams):
     Words = []
     Bigrams = dict()
     Threegrams = dict()
@@ -129,13 +129,13 @@ def pymorphy2_nlp(text, nlpModel, stopWords):
     sents = sent_tokenize(text)
     for sent in sents:
         WordsTags, Words, NWords = pymorphy2_built_words(sent, Words, NWords, nlpModel, stopWords)
-        if len(WordsTags)>2:
+        if ('Bigrams' in nGrams.values()) and (len(WordsTags)>2):
             Bigrams, NBigrams = pymorphy2_built_bigrams(WordsTags, Words, Bigrams, NBigrams, stopWords)
-        if len(WordsTags)>3:
+        if ('Threegrams' in nGrams.values()) and (len(WordsTags)>3):
             Threegrams, SThreegrams, NThreegrams = pymorphy2_built_threegrams(WordsTags, Words, Threegrams, SThreegrams, NThreegrams, stopWords)
     SWords = dict(list(zip(NWords, NWords)))
     SBigrams = dict(list(zip(NBigrams, NBigrams)))
-    return (Words, SWords, NWords), (Bigrams, SBigrams, NBigrams), (Threegrams, SThreegrams, NThreegrams)
+    return {"1" : (Words, SWords, NWords), "2" : (Bigrams, SBigrams, NBigrams), "3" : (Threegrams, SThreegrams, NThreegrams)}
 
 def append_lang(defaultLangs, lang, package):
     try:
