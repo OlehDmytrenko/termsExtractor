@@ -39,18 +39,25 @@ def get_key(d, value):
         if v == value:
             return k
 
-def pymorphy2_most_freq(STerms, keyTerms, top):
+def pymorphy2_most_freq(STerms, NTerms, top):
     mostFreqKeyTerms = ''
-    fdist = FreqDist(word.lower() for word in keyTerms)
+    mostFreqSTerms = []
+    fdist = FreqDist(word.lower() for word in NTerms)
     for (term, freq) in fdist.most_common(top):
         mostFreqKeyTerms = mostFreqKeyTerms + str(get_key(STerms, term))  + ', ' 
-    return mostFreqKeyTerms[:-2]
+        mostFreqSTerms.append(get_key(STerms, term))
+    return mostFreqKeyTerms[:-2], mostFreqSTerms
 
 
 def pymorphy2_most_freq_key_terms(Terms, nGrams, top):
     sys.stdout = sys.__stdout__
     for i in nGrams:
-        print('<'+nGrams[i]+'>'+pymorphy2_most_freq(Terms[i][1], Terms[i][2], top)+'</'+nGrams[i]+'>')
+        mostFreqTerms, mostFreqSTerms = pymorphy2_most_freq(Terms[i][1], Terms[i][2], top)
+        print('<'+nGrams[i]+'>'+mostFreqTerms+'</'+nGrams[i]+'>')
+        mostFreqTerms = ''
+        for sTerm in mostFreqSTerms:
+            mostFreqTerms = mostFreqTerms + str(get_key(Terms[i][0], Terms[i][1][sTerm])) + ', ' 
+        print('<Souerce '+nGrams[i]+'>'+mostFreqTerms[:-2]+'</Source '+nGrams[i]+'>')
     print('***')
     sys.stdout = stdOutput
     return

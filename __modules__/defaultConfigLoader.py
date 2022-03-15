@@ -24,7 +24,7 @@ def load_default_ngrams():
             jsonConfig = json.load(configFile)
             try:
                 ngrams = {list(langModel.keys())[0] : langModel[list(langModel.keys())[0]]
-                                for langModel in jsonConfig["ngrams"]}
+                                for langModel in jsonConfig["nGrams"]}
             except AttributeError:
                 pass
             configFile.close()
