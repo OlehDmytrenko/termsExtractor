@@ -119,7 +119,7 @@ def pymorphy2_built_threegrams(WordsTags, Words, Threegrams, SThreegrams, NThree
     return Threegrams, SThreegrams, NThreegrams
 
 def pymorphy2_nlp(text, nlpModel, stopWords, nGrams):
-    Words = []
+    Words = dict()
     Bigrams = dict()
     Threegrams = dict()
     SThreegrams = dict()
@@ -133,6 +133,7 @@ def pymorphy2_nlp(text, nlpModel, stopWords, nGrams):
             Bigrams, NBigrams = pymorphy2_built_bigrams(WordsTags, Words, Bigrams, NBigrams, stopWords)
         if ('Threegrams' in nGrams.values()) and (len(WordsTags)>3):
             Threegrams, SThreegrams, NThreegrams = pymorphy2_built_threegrams(WordsTags, Words, Threegrams, SThreegrams, NThreegrams, stopWords)
+    Words = dict(list(zip(NWords, NWords)))
     SWords = dict(list(zip(NWords, NWords)))
     SBigrams = dict(list(zip(NBigrams, NBigrams)))
     return {"1" : (Words, SWords, NWords), "2" : (Bigrams, SBigrams, NBigrams), "3" : (Threegrams, SThreegrams, NThreegrams)}

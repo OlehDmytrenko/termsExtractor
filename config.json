@@ -16,7 +16,7 @@
 "minMessLength" : "5",
 "maxMessLength" : "2000",
 
-"ngrams" : [
+"nGrams" : [
 	{"1" : "Words"},
 	{"2" : "Bigrams"},
 	{"3" : "Threegrams"}
