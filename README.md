@@ -35,7 +35,7 @@
 - `SpaCy` [v3.2.3](https://pypi.org/project/spacy/3.2.3/)
 - `Stop-words` [v.2018.7.23](https://pypi.org/project/stop-words/2018.7.23/)
 - `fastText` [v9.0.2](https://github.com/facebookresearch/fastText)
-- [lid.176.ftz](https://dl.fbaipublicfiles.com/fasttext/supervised-models/lid.176.ftz) — модель бібліотеки `fasttext` для розпізнавання [176 мов](https://fasttext.cc/docs/en/language-identification.html#list-of-supported-languages) 
+- [lid.176.ftz](https://dl.fbaipublicfiles.com/fasttext/supervised-models/lid.176.ftz) — модель бібліотеки `fasttext` для ідентифікації [176 мов](https://fasttext.cc/docs/en/language-identification.html#list-of-supported-languages) 
 - [uk](https://pymorphy2.readthedocs.io/en/stable/user/guide.html), [ru](https://pymorphy2.readthedocs.io/en/stable/user/guide.html), [en](https://stanfordnlp.github.io/stanza/available_models.html) моделі для відповідно української, російської та англійської мов, що використовуються програмним модулем за замовчуванням.
 
 <a name="function"></a>
@@ -59,7 +59,7 @@
 			- `pymorphy2_model_loader()` — функцію завантаження мовної моделі бібліотеки [pymorphy2](https://pypi.org/project/pymorphy2/0.9.1/) для української або російської мови
 			- `nltk_model_loader()` — функцію завантаження мовної моделі бібліотеки [NLTK](https://pypi.org/project/nltk/3.7/) для англійської мови 
 			- `spacy_model_loader()` — функцію завантаження мовних моделей бібліотеки [SpaCy](https://pypi.org/project/spacy/3.2.3/) для [широкого набору мов](https://spacy.io/usage/models#languages)
-			- `stanza_model_loader()` — функцію завантаження овних моделей бібліотеки [Stanza](https://pypi.org/project/stanza/1.3.0/)) для [широкого набору мов] (https://stanfordnlp.github.io/stanza/available_models.html#available-ud-models)
+			- `stanza_model_loader()` — функцію завантаження овних моделей бібліотеки [Stanza](https://pypi.org/project/stanza/1.3.0/)) для [широкого набору мов](https://stanfordnlp.github.io/stanza/available_models.html#available-ud-models)
 	- `defaultSWsLoader.py` — підмодуль, що призначений для завантаження списків стоп-слів, які визначені за замовчуванням для кожної із мов у файлі конфігурацій `config.json` або у списку мов за замовуванням (у випадку відсутності файла `config.json` чи виникнення проблем з його зчитуванням та обробкою), і містить наступні функції:
 		- `load_default_stop_words()` — функцію завантаження завантаження списків стоп-слів, які визначені за замовчуванням для кожної із мов у файлі конфігурацій `config.json` (у випадку відсутності файла `config.json` чи виникнення проблем з його зчитуванням та обробкою - у списку мов за замовуванням) для кожної із мов (зокрема доступні користувацькі стоп-словники для української, росфйської, англійської, китайської та івриту). У випадку, коли список мов порожній чи невизначений, то в інтерактивному режимі пропонується задати цей список вручну, вказавши мову та бібліотеку для мовної моделі (наприклад, [pymorphy2](https://pypi.org/project/pymorphy2/0.9.1/), [NLTK](https://pypi.org/project/nltk/3.7/), [SpaCy](https://pypi.org/project/spacy/3.2.3/) чи [Stanza](https://pypi.org/project/stanza/1.3.0/)) розділивши ці вхідні дані знаком `:`. Ця функція використовує наступні підфункції завантаження відповідних мовних моделей:
 			- `load_stop_words()` — функцію завантаження стоп-слів для списку мов, визначених вручну
