@@ -18,9 +18,9 @@ def dir_below():
     dirBelow = os.path.abspath(os.curdir).replace(curFolder, "")
     return dirBelow
 
-def load_default_ngrams():
+def load_default_ngrams(configPath):
     try:
-        with open("config.json", "r") as configFile:
+        with open(configPath+"config.json", "r") as configFile:
             jsonConfig = json.load(configFile)
             try:
                 ngrams = {list(langModel.keys())[0] : langModel[list(langModel.keys())[0]]
@@ -33,9 +33,9 @@ def load_default_ngrams():
         ngrams = {"1" : "Words", "2" : "Bigrams", "3" : "Threegrams"}
     return ngrams
 
-def default_int_value(key):
+def default_int_value(configPath, key):
     try:
-        with open("config.json", "r") as configFile:
+        with open(configPath+"config.json", "r") as configFile:
             jsonConfig = json.load(configFile)
             messageLength = int(jsonConfig[key])
             configFile.close()
@@ -43,9 +43,9 @@ def default_int_value(key):
         print ("Error! Max Messages Length can't be reading! Please, check a key {0} in config.json".format(key))
     return messageLength
 
-def load_default_languages():
+def load_default_languages(configPath):
     try:
-        with open("config.json", "r") as configFile:
+        with open(configPath+"config.json", "r") as configFile:
             jsonConfig = json.load(configFile)
             try:
                 defaultLangs = {list(langModel.keys())[0] : langModel[list(langModel.keys())[0]]
