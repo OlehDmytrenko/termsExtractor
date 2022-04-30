@@ -34,10 +34,10 @@ if __name__ == "__main__":
     sys.stderr = stdOutput
     sys.stdout = stdOutput
 
-    defaultLangs = defaultConfigLoader.load_default_languages()
+    defaultLangs = defaultConfigLoader.load_default_languages(os.getcwd())
     defaultSWs = defaultSWsLoader.load_default_stop_words(defaultLangs)
     nlpModels = defaultModelsLoader.load_default_models(defaultLangs)
-    nGrams = defaultConfigLoader.load_default_ngrams()
+    nGrams = defaultConfigLoader.load_default_ngrams(os.getcwd())
     
     with open(inputFilePath, "r", encoding="utf-8") as inputFlow:
         message = ""
@@ -50,7 +50,7 @@ if __name__ == "__main__":
                     sys.stdout = sys.__stdout__
                     print('<content>'+message+'</content>')
                     sys.stdout = stdOutput
-                    message = message[0:defaultConfigLoader.default_int_value('maxMessLength')].lower()            
+                    message = message[0:defaultConfigLoader.default_int_value(os.getcwd(), 'maxMessLength')].lower()            
                     lang = textProcessor.lang_detect(message, defaultLangs, nlpModels, defaultSWs)
                     if (not defaultLangs[lang]):
                         message = ""
@@ -59,17 +59,17 @@ if __name__ == "__main__":
                         dictTerms = textProcessor.pymorphy2_nlp(message, nlpModels[lang], defaultSWs[lang], nGrams)
                         Terms = dict(zip(nGrams.keys(),[dictTerms[i] for i in nGrams]))
                         termsRanker.pymorphy2_most_freq_key_terms(Terms, nGrams,
-                                                                  defaultConfigLoader.default_int_value('maxNumNarratives'))
+                                                                  defaultConfigLoader.default_int_value(os.getcwd(), 'maxNumNarratives'))
                     elif (defaultLangs[lang] == 'stanza'):
                         dictNTerms  = textProcessor.stanza_nlp(message, nlpModels[lang], defaultSWs[lang], nGrams)    
                         NTerms = dict(zip(nGrams.keys(),[dictNTerms[i] for i in nGrams]))
                         termsRanker.stanza_most_freq_key_terms(NTerms, nGrams,
-                                                               defaultConfigLoader.default_int_value('maxNumNarratives'))
+                                                               defaultConfigLoader.default_int_value(os.getcwd(), 'maxNumNarratives'))
                     elif (not defaultLangs[lang]):
                         dictTerms = textProcessor.pymorphy2_nlp(message, nlpModels['uk'], defaultSWs['uk'], nGrams)    
                         Terms = dict(zip(nGrams.keys(),[dictTerms[i] for i in nGrams]))
                         termsRanker.pymorphy2_most_freq_key_terms(Terms, nGrams,
-                                                                  defaultConfigLoader.default_int_value('maxNumNarratives'))
+                                                                  defaultConfigLoader.default_int_value(os.getcwd(), 'maxNumNarratives'))
                 
                 message = ""
         inputFlow.close()
