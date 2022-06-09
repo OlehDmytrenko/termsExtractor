@@ -20,7 +20,7 @@ def dir_below():
 
 def load_default_ngrams(configPath):
     try:
-        with open(configPath+"config.json", "r") as configFile:
+        with open(configPath+"/config.json", "r") as configFile:
             jsonConfig = json.load(configFile)
             try:
                 ngrams = {list(langModel.keys())[0] : langModel[list(langModel.keys())[0]]
@@ -35,7 +35,7 @@ def load_default_ngrams(configPath):
 
 def default_int_value(configPath, key):
     try:
-        with open(configPath+"config.json", "r") as configFile:
+        with open(configPath+"/config.json", "r") as configFile:
             jsonConfig = json.load(configFile)
             messageLength = int(jsonConfig[key])
             configFile.close()
@@ -45,7 +45,7 @@ def default_int_value(configPath, key):
 
 def load_default_languages(configPath):
     try:
-        with open(configPath+"config.json", "r") as configFile:
+        with open(configPath+"/config.json", "r") as configFile:
             jsonConfig = json.load(configFile)
             try:
                 defaultLangs = {list(langModel.keys())[0] : langModel[list(langModel.keys())[0]]

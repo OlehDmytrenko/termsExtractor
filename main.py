@@ -18,7 +18,7 @@ Edited on Thu Mar 10 05:22:52 2022
 @author: Олег Дмитренко
 
 """
-import sys
+import sys, os
 from __modules__ import defaultConfigLoader, defaultModelsLoader, defaultSWsLoader, textProcessor, termsRanker
 
 import time
@@ -27,7 +27,7 @@ t0 = time.time()
 if __name__ == "__main__":
     inputFilePath = sys.argv[1]
     #if start script in python compiler mode, 'spyder' for example, than comemnt 2 line above and recomment 2 line below
-    #inputFileDir = '/Users/dmytrenko.o/Documents/GitHub/narrativesExtractor/datasets/otbor4.txt'
+    #inputFileDir = '/Users/dmytrenko.o/Documents/GitHub/termsExtractor/datasets/otbor4.txt'
     #inputFilePath = '/Users/dmytrenko.o/Documents/GitHub/narrativesExtractor/datasets/20210126_.txt'
     #outFileDir = '/Users/dmytrenko.o/Documents/GitHub/narrativesExtractor/results/'
     stdOutput = open("outlog.log", "a")
@@ -57,8 +57,8 @@ if __name__ == "__main__":
                         continue
                     if (defaultLangs[lang] == 'pymorphy2'):
                         dictTerms = textProcessor.pymorphy2_nlp(message, nlpModels[lang], defaultSWs[lang], nGrams)
-                        Terms = dict(zip(nGrams.keys(),[dictTerms[i] for i in nGrams]))
-                        termsRanker.pymorphy2_most_freq_key_terms(Terms, nGrams,
+                        NTerms = dict(zip(nGrams.keys(),[dictTerms[i] for i in nGrams]))
+                        termsRanker.pymorphy2_most_freq_key_terms(NTerms, nGrams,
                                                                   defaultConfigLoader.default_int_value(os.getcwd(), 'maxNumNarratives'))
                     elif (defaultLangs[lang] == 'stanza'):
                         dictNTerms  = textProcessor.stanza_nlp(message, nlpModels[lang], defaultSWs[lang], nGrams)    
