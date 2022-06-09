@@ -69,8 +69,9 @@ def stanza_nlp(text, nlpModel, stopWords, nGrams):
             NThreegrams = stanza_built_threegrams(WordsTags, NThreegrams, stopWords)
     return {"1" : NWords, "2" : NBigrams, "3" : NThreegrams}
 
-def pymorphy2_built_words(sent, NWords, nlpModel, stopWords):
+def pymorphy2_built_words(sent, Words, NWords, nlpModel, stopWords):
     WordsTags = []
+    Words = []
     words = word_tokenize(sent)
     for word in words:
         nword = nlpModel.normal_forms(word)[0]
@@ -78,47 +79,78 @@ def pymorphy2_built_words(sent, NWords, nlpModel, stopWords):
         if tag == 'NPRO':
             tag = 'NOUN'
         WordsTags.append((nword,tag))
+        Words.append(word)
         if (nword not in stopWords) and (tag == 'NOUN'): 
             NWords.append(nword)
-    return WordsTags, NWords
+    return WordsTags, Words, NWords
 
+def CoordBigram(Bigrams, nw1, nw2, nlpModel):
+    adjMorph = nlpModel.parse(nw1)[0]
+    nounMorph = nlpModel.parse(nw2)[0]
+    nounGender = nounMorph.tag.gender
+    if nounGender == "masc":   
+        Bigrams[nw1+'_'+nw2] = nw1+'_'+nw2
+    else:
+        Bigrams[adjMorph.inflect({nounGender}).word+'_'+nw2] = nw1+'_'+nw2
       
-def pymorphy2_built_bigrams(WordsTags, NBigrams, nlpModel, stopWords):
+def pymorphy2_built_bigrams(WordsTags, Words, Bigrams, NBigrams, nlpModel, stopWords):
     for i in range(1, len(WordsTags)):
         nw1 = WordsTags[i-1][0] 
         nw2 = WordsTags[i][0]
+        w1 = Words[i-1]
+        w2 = Words[i]
         t1 = WordsTags[i-1][1]
         t2 = WordsTags[i][1]
         if (t1 == 'ADJF') and (t2 == 'NOUN') and (nw1 not in stopWords) and (nw2 not in stopWords):
             NBigrams.append(nw1+'_'+nw2)
-    return NBigrams
+            try:
+                #CoordBigram(Bigrams, nw1, nw2, nlpModel)
+                Bigrams[w1+'_'+w2] = nw1+'_'+nw2
+            except:
+                Bigrams[w1+'_'+w2] = nw1+'_'+nw2
+                continue
+    return Bigrams, NBigrams
 
-def pymorphy2_built_threegrams(WordsTags, NThreegrams, stopWords):
+def pymorphy2_built_threegrams(WordsTags, Words, Threegrams, SThreegrams, NThreegrams, stopWords):
     for i in range(2, len(WordsTags)):
         nw1 = WordsTags[i-2][0]
         nw2 = WordsTags[i-1][0]
         nw3 = WordsTags[i][0]
+        w1 = Words[i-2]
+        w2 = Words[i-1]
+        w3 = Words[i]
         t1 = WordsTags[i-2][1]
         t2 = WordsTags[i-1][1]
         t3 = WordsTags[i][1]
         if (t1 == 'NOUN') and ((t2 == 'CCONJ') or (t2 == 'PREP')) and (t3 == 'NOUN') and (nw1 not in stopWords) and (nw3 not in stopWords):
             NThreegrams.append(nw1+'_'+nw2+'_'+nw3)
+            SThreegrams[nw1+'_'+nw2+'_'+w3] = nw1+'_'+nw2+'_'+nw3
+            Threegrams[w1+'_'+w2+'_'+w3] = nw1+'_'+nw2+'_'+nw3
         elif (t1 == 'ADJF') and (t2 == 'ADJF') and (t3 == 'NOUN') and (nw1 not in stopWords) and (nw2 not in stopWords) and (nw3 not in stopWords):
             NThreegrams.append(nw1+'_'+nw2+'_'+nw3)
-    return NThreegrams
+            SThreegrams[nw1+'_'+nw2+'_'+w3] = nw1+'_'+nw2+'_'+nw3
+            Threegrams[w1+'_'+w2+'_'+w3] = nw1+'_'+nw2+'_'+nw3
+    return Threegrams, SThreegrams, NThreegrams
 
 def pymorphy2_nlp(text, nlpModel, stopWords, nGrams):
+    Words = dict()
+    Bigrams = dict()
+    Threegrams = dict()
+    SThreegrams = dict()
     NWords = []
     NBigrams = []
     NThreegrams = []
     sents = sent_tokenize(text)
     for sent in sents:
-        WordsTags, NWords = pymorphy2_built_words(sent, NWords, nlpModel, stopWords)
+        WordsTags, Words, NWords = pymorphy2_built_words(sent, Words, NWords, nlpModel, stopWords)
         if ('Bigrams' in nGrams.values()) and (len(WordsTags)>2):
-            NBigrams = pymorphy2_built_bigrams(WordsTags, NBigrams, nlpModel, stopWords)
+            Bigrams, NBigrams = pymorphy2_built_bigrams(WordsTags, Words, Bigrams, NBigrams, nlpModel, stopWords)
         if ('Threegrams' in nGrams.values()) and (len(WordsTags)>3):
-            NThreegrams = pymorphy2_built_threegrams(WordsTags, NThreegrams, stopWords)
-    return {"1" : NWords, "2" : NBigrams, "3" : NThreegrams}
+            Threegrams, SThreegrams, NThreegrams = pymorphy2_built_threegrams(WordsTags, Words, Threegrams, SThreegrams, NThreegrams, stopWords)
+    Words = dict(list(zip(NWords, NWords)))
+    SWords = dict(list(zip(NWords, NWords)))
+    SBigrams = dict(list(zip(NBigrams, NBigrams)))
+    return {"1" : (Words, SWords, NWords), "2" : (Bigrams, SBigrams, NBigrams), "3" : (Threegrams, SThreegrams, NThreegrams)}
 
 def append_lang(defaultLangs, lang, package):
     try:

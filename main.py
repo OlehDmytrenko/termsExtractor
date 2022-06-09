@@ -57,8 +57,8 @@ if __name__ == "__main__":
                         continue
                     if (defaultLangs[lang] == 'pymorphy2'):
                         dictTerms = textProcessor.pymorphy2_nlp(message, nlpModels[lang], defaultSWs[lang], nGrams)
-                        NTerms = dict(zip(nGrams.keys(),[dictTerms[i] for i in nGrams]))
-                        termsRanker.pymorphy2_most_freq_key_terms(NTerms, nGrams,
+                        Terms = dict(zip(nGrams.keys(),[dictTerms[i] for i in nGrams]))
+                        termsRanker.pymorphy2_most_freq_key_terms(Terms, nGrams,
                                                                   defaultConfigLoader.default_int_value(os.getcwd(), 'maxNumNarratives'))
                     elif (defaultLangs[lang] == 'stanza'):
                         dictNTerms  = textProcessor.stanza_nlp(message, nlpModels[lang], defaultSWs[lang], nGrams)    
