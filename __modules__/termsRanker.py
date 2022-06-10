@@ -1,9 +1,5 @@
 # -*- coding: utf-8 -*-
 """
-Created on Wed Feb 12:55:31 2022
-Edited on Sun Feb 26 23:54:43 2022
-Edited on Thu Mar  8 06:25:44 2022
-Edited on Wed Mar  9 09:03:15 2022
 
 @author: Олег Дмитренко
 
@@ -127,7 +123,7 @@ def pymorphy2_most_freq_key_terms(Terms, nGrams, top):
     sys.stdout = sys.__stdout__
     for i in nGrams:
         mostFreqTerms, mostFreqSTerms = pymorphy2_most_freq(Terms[i][1], Terms[i][2], top)
-        if nGrams[i] == "Bigrams":
+        if (nGrams[i] == "Bigrams") and mostFreqTerms:
             mostFreqTerms = CoordBigram(mostFreqTerms)
         elif nGrams[i] == "Threegrams":
             mostFreqTerms = ''

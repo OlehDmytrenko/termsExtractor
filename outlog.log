@@ -1909,3 +1909,405 @@ You are lucky! The program successfully finished!
 You are lucky! The program successfully finished!
 
 8.747026920318604
+'uk' language model for 'pymorphy2' package was downloaded successfully!
+'uk' 'pymorphy2' model was loaded successfully!
+'ru' language model for 'pymorphy2' package was downloaded successfully!
+'ru' 'pymorphy2' model was loaded successfully!
+Downloading https://raw.githubusercontent.com/stanfordnlp/stanza-resources/main/resources_1.4.0.json:   0%|          | 0.00/26.0k [00:00<?, ?B/s]Downloading https://raw.githubusercontent.com/stanfordnlp/stanza-resources/main/resources_1.4.0.json: 154kB [00:00, 3.17MB/s]                    'json' has been imported
+'fasttext' has been imported
+'nltk' has been imported
+'os' already in sys.modules
+'io' already in sys.modules
+'stop_words' has been imported
+'subprocess' already in sys.modules
+'pymorphy2' has been imported
+'nltk' already in sys.modules
+'spacy' has been imported
+'stanza' has been imported
+'nltk' already in sys.modules
+2022-06-10 14:01:30 INFO: Downloading default packages for language: en (English)...
+2022-06-10 14:01:31 INFO: File exists: /Users/dmytrenko.o/stanza_resources/en/default.zip
+2022-06-10 14:01:34 INFO: Finished downloading models and saved to /Users/dmytrenko.o/stanza_resources.
+
+'en' language model for 'stanza' package was downloaded successfully!
+Downloading https://raw.githubusercontent.com/stanfordnlp/stanza-resources/main/resources_1.4.0.json:   0%|          | 0.00/26.0k [00:00<?, ?B/s]Downloading https://raw.githubusercontent.com/stanfordnlp/stanza-resources/main/resources_1.4.0.json: 154kB [00:00, 1.45MB/s]                    Downloading https://raw.githubusercontent.com/stanfordnlp/stanza-resources/main/resources_1.4.0.json: 154kB [00:00, 1.44MB/s]2022-06-10 14:01:34 INFO: Loading these models for language: en (English):
+========================
+| Processor | Package  |
+------------------------
+| tokenize  | combined |
+| pos       | combined |
+| lemma     | combined |
+========================
+
+2022-06-10 14:01:34 INFO: Use device: cpu
+2022-06-10 14:01:34 INFO: Loading: tokenize
+2022-06-10 14:01:34 INFO: Loading: pos
+2022-06-10 14:01:34 INFO: Loading: lemma
+2022-06-10 14:01:34 INFO: Done loading processors!
+
+'en' 'stanza' model was loaded successfully!
+
+You are lucky! The program successfully finished!
+
+8.763942956924438
+'uk' language model for 'pymorphy2' package was downloaded successfully!
+'uk' 'pymorphy2' model was loaded successfully!
+'ru' language model for 'pymorphy2' package was downloaded successfully!
+'ru' 'pymorphy2' model was loaded successfully!
+Downloading https://raw.githubusercontent.com/stanfordnlp/stanza-resources/main/resources_1.4.0.json:   0%|          | 0.00/26.0k [00:00<?, ?B/s]Downloading https://raw.githubusercontent.com/stanfordnlp/stanza-resources/main/resources_1.4.0.json: 154kB [00:00, 22.6MB/s]                    'json' has been imported
+'fasttext' has been imported
+'nltk' has been imported
+'os' already in sys.modules
+'io' already in sys.modules
+'stop_words' has been imported
+'subprocess' already in sys.modules
+'pymorphy2' has been imported
+'nltk' already in sys.modules
+'spacy' has been imported
+'stanza' has been imported
+'nltk' already in sys.modules
+2022-06-10 14:01:48 INFO: Downloading default packages for language: en (English)...
+2022-06-10 14:01:49 INFO: File exists: /Users/dmytrenko.o/stanza_resources/en/default.zip
+2022-06-10 14:01:53 INFO: Finished downloading models and saved to /Users/dmytrenko.o/stanza_resources.
+
+'en' language model for 'stanza' package was downloaded successfully!
+Downloading https://raw.githubusercontent.com/stanfordnlp/stanza-resources/main/resources_1.4.0.json:   0%|          | 0.00/26.0k [00:00<?, ?B/s]Downloading https://raw.githubusercontent.com/stanfordnlp/stanza-resources/main/resources_1.4.0.json: 154kB [00:00, 46.6MB/s]                    2022-06-10 14:01:53 INFO: Loading these models for language: en (English):
+========================
+| Processor | Package  |
+------------------------
+| tokenize  | combined |
+| pos       | combined |
+| lemma     | combined |
+========================
+
+2022-06-10 14:01:53 INFO: Use device: cpu
+2022-06-10 14:01:53 INFO: Loading: tokenize
+2022-06-10 14:01:53 INFO: Loading: pos
+2022-06-10 14:01:53 INFO: Loading: lemma
+2022-06-10 14:01:53 INFO: Done loading processors!
+
+'en' 'stanza' model was loaded successfully!
+
+You are lucky! The program successfully finished!
+
+8.906442880630493
+'uk' language model for 'pymorphy2' package was downloaded successfully!
+'uk' 'pymorphy2' model was loaded successfully!
+'ru' language model for 'pymorphy2' package was downloaded successfully!
+'ru' 'pymorphy2' model was loaded successfully!
+Downloading https://raw.githubusercontent.com/stanfordnlp/stanza-resources/main/resources_1.4.0.json:   0%|          | 0.00/26.0k [00:00<?, ?B/s]Downloading https://raw.githubusercontent.com/stanfordnlp/stanza-resources/main/resources_1.4.0.json: 154kB [00:00, 24.6MB/s]                    'json' has been imported
+'fasttext' has been imported
+'nltk' has been imported
+'os' already in sys.modules
+'io' already in sys.modules
+'stop_words' has been imported
+'subprocess' already in sys.modules
+'pymorphy2' has been imported
+'nltk' already in sys.modules
+'spacy' has been imported
+'stanza' has been imported
+'nltk' already in sys.modules
+2022-06-10 14:03:17 INFO: Downloading default packages for language: en (English)...
+2022-06-10 14:03:18 INFO: File exists: /Users/dmytrenko.o/stanza_resources/en/default.zip
+2022-06-10 14:03:21 INFO: Finished downloading models and saved to /Users/dmytrenko.o/stanza_resources.
+
+'en' language model for 'stanza' package was downloaded successfully!
+Downloading https://raw.githubusercontent.com/stanfordnlp/stanza-resources/main/resources_1.4.0.json:   0%|          | 0.00/26.0k [00:00<?, ?B/s]Downloading https://raw.githubusercontent.com/stanfordnlp/stanza-resources/main/resources_1.4.0.json: 154kB [00:00, 28.6MB/s]                    2022-06-10 14:03:21 INFO: Loading these models for language: en (English):
+========================
+| Processor | Package  |
+------------------------
+| tokenize  | combined |
+| pos       | combined |
+| lemma     | combined |
+========================
+
+2022-06-10 14:03:21 INFO: Use device: cpu
+2022-06-10 14:03:21 INFO: Loading: tokenize
+2022-06-10 14:03:21 INFO: Loading: pos
+2022-06-10 14:03:22 INFO: Loading: lemma
+2022-06-10 14:03:22 INFO: Done loading processors!
+
+'en' 'stanza' model was loaded successfully!
+
+You are lucky! The program successfully finished!
+
+8.902467012405396
+'uk' language model for 'pymorphy2' package was downloaded successfully!
+'uk' 'pymorphy2' model was loaded successfully!
+'ru' language model for 'pymorphy2' package was downloaded successfully!
+'ru' 'pymorphy2' model was loaded successfully!
+Downloading https://raw.githubusercontent.com/stanfordnlp/stanza-resources/main/resources_1.4.0.json:   0%|          | 0.00/26.0k [00:00<?, ?B/s]Downloading https://raw.githubusercontent.com/stanfordnlp/stanza-resources/main/resources_1.4.0.json: 154kB [00:00, 20.9MB/s]                    'json' has been imported
+'fasttext' has been imported
+'nltk' has been imported
+'os' already in sys.modules
+'io' already in sys.modules
+'stop_words' has been imported
+'subprocess' already in sys.modules
+'pymorphy2' has been imported
+'nltk' already in sys.modules
+'spacy' has been imported
+'stanza' has been imported
+'nltk' already in sys.modules
+2022-06-10 14:15:33 INFO: Downloading default packages for language: en (English)...
+2022-06-10 14:15:34 INFO: File exists: /Users/dmytrenko.o/stanza_resources/en/default.zip
+2022-06-10 14:15:37 INFO: Finished downloading models and saved to /Users/dmytrenko.o/stanza_resources.
+
+'en' language model for 'stanza' package was downloaded successfully!
+Downloading https://raw.githubusercontent.com/stanfordnlp/stanza-resources/main/resources_1.4.0.json:   0%|          | 0.00/26.0k [00:00<?, ?B/s]Downloading https://raw.githubusercontent.com/stanfordnlp/stanza-resources/main/resources_1.4.0.json: 154kB [00:00, 46.0MB/s]                    2022-06-10 14:15:37 INFO: Loading these models for language: en (English):
+========================
+| Processor | Package  |
+------------------------
+| tokenize  | combined |
+| pos       | combined |
+| lemma     | combined |
+========================
+
+2022-06-10 14:15:37 INFO: Use device: cpu
+2022-06-10 14:15:37 INFO: Loading: tokenize
+2022-06-10 14:15:37 INFO: Loading: pos
+2022-06-10 14:15:37 INFO: Loading: lemma
+2022-06-10 14:15:37 INFO: Done loading processors!
+
+'en' 'stanza' model was loaded successfully!
+Traceback (most recent call last):
+  File "/Users/dmytrenko.o/Documents/GitHub/termsExtractor/main.py", line 61, in <module>
+    termsRanker.pymorphy2_most_freq_key_terms(Terms, nGrams,
+  File "/Users/dmytrenko.o/Documents/GitHub/termsExtractor/__modules__/termsRanker.py", line 131, in pymorphy2_most_freq_key_terms
+    mostFreqTerms = CoordBigram(mostFreqTerms)
+  File "/Users/dmytrenko.o/Documents/GitHub/termsExtractor/__modules__/termsRanker.py", line 45, in CoordBigram
+    nw1, nw2 = bigram.split("_")
+ValueError: not enough values to unpack (expected 2, got 1)
+'uk' language model for 'pymorphy2' package was downloaded successfully!
+'uk' 'pymorphy2' model was loaded successfully!
+'ru' language model for 'pymorphy2' package was downloaded successfully!
+'ru' 'pymorphy2' model was loaded successfully!
+Downloading https://raw.githubusercontent.com/stanfordnlp/stanza-resources/main/resources_1.4.0.json:   0%|          | 0.00/26.0k [00:00<?, ?B/s]Downloading https://raw.githubusercontent.com/stanfordnlp/stanza-resources/main/resources_1.4.0.json: 154kB [00:00, 23.8MB/s]                    'json' has been imported
+'fasttext' has been imported
+'nltk' has been imported
+'os' already in sys.modules
+'io' already in sys.modules
+'stop_words' has been imported
+'subprocess' already in sys.modules
+'pymorphy2' has been imported
+'nltk' already in sys.modules
+'spacy' has been imported
+'stanza' has been imported
+'nltk' already in sys.modules
+2022-06-10 14:20:00 INFO: Downloading default packages for language: en (English)...
+2022-06-10 14:20:01 INFO: File exists: /Users/dmytrenko.o/stanza_resources/en/default.zip
+2022-06-10 14:20:04 INFO: Finished downloading models and saved to /Users/dmytrenko.o/stanza_resources.
+
+'en' language model for 'stanza' package was downloaded successfully!
+Downloading https://raw.githubusercontent.com/stanfordnlp/stanza-resources/main/resources_1.4.0.json:   0%|          | 0.00/26.0k [00:00<?, ?B/s]Downloading https://raw.githubusercontent.com/stanfordnlp/stanza-resources/main/resources_1.4.0.json: 154kB [00:00, 25.6MB/s]                    2022-06-10 14:20:05 INFO: Loading these models for language: en (English):
+========================
+| Processor | Package  |
+------------------------
+| tokenize  | combined |
+| pos       | combined |
+| lemma     | combined |
+========================
+
+2022-06-10 14:20:05 INFO: Use device: cpu
+2022-06-10 14:20:05 INFO: Loading: tokenize
+2022-06-10 14:20:05 INFO: Loading: pos
+2022-06-10 14:20:05 INFO: Loading: lemma
+2022-06-10 14:20:05 INFO: Done loading processors!
+
+'en' 'stanza' model was loaded successfully!
+Traceback (most recent call last):
+  File "/Users/dmytrenko.o/Documents/GitHub/termsExtractor/main.py", line 47, in <module>
+    termsRanker.pymorphy2_most_freq_key_terms(Terms, nGrams,
+  File "/Users/dmytrenko.o/Documents/GitHub/termsExtractor/__modules__/termsRanker.py", line 127, in pymorphy2_most_freq_key_terms
+    mostFreqTerms = CoordBigram(mostFreqTerms)
+  File "/Users/dmytrenko.o/Documents/GitHub/termsExtractor/__modules__/termsRanker.py", line 41, in CoordBigram
+    nw1, nw2 = bigram.split("_")
+ValueError: not enough values to unpack (expected 2, got 1)
+'uk' language model for 'pymorphy2' package was downloaded successfully!
+'uk' 'pymorphy2' model was loaded successfully!
+'ru' language model for 'pymorphy2' package was downloaded successfully!
+'ru' 'pymorphy2' model was loaded successfully!
+Downloading https://raw.githubusercontent.com/stanfordnlp/stanza-resources/main/resources_1.4.0.json:   0%|          | 0.00/26.0k [00:00<?, ?B/s]Downloading https://raw.githubusercontent.com/stanfordnlp/stanza-resources/main/resources_1.4.0.json: 154kB [00:00, 2.00MB/s]                    'json' has been imported
+'fasttext' has been imported
+'nltk' has been imported
+'os' already in sys.modules
+'io' already in sys.modules
+'stop_words' has been imported
+'subprocess' already in sys.modules
+'pymorphy2' has been imported
+'nltk' already in sys.modules
+'spacy' has been imported
+'stanza' has been imported
+'nltk' already in sys.modules
+2022-06-10 14:24:10 INFO: Downloading default packages for language: en (English)...
+2022-06-10 14:24:11 INFO: File exists: /Users/dmytrenko.o/stanza_resources/en/default.zip
+2022-06-10 14:24:14 INFO: Finished downloading models and saved to /Users/dmytrenko.o/stanza_resources.
+
+'en' language model for 'stanza' package was downloaded successfully!
+Downloading https://raw.githubusercontent.com/stanfordnlp/stanza-resources/main/resources_1.4.0.json:   0%|          | 0.00/26.0k [00:00<?, ?B/s]Downloading https://raw.githubusercontent.com/stanfordnlp/stanza-resources/main/resources_1.4.0.json: 154kB [00:00, 28.5MB/s]                    2022-06-10 14:24:15 INFO: Loading these models for language: en (English):
+========================
+| Processor | Package  |
+------------------------
+| tokenize  | combined |
+| pos       | combined |
+| lemma     | combined |
+========================
+
+2022-06-10 14:24:15 INFO: Use device: cpu
+2022-06-10 14:24:15 INFO: Loading: tokenize
+2022-06-10 14:24:15 INFO: Loading: pos
+2022-06-10 14:24:15 INFO: Loading: lemma
+2022-06-10 14:24:15 INFO: Done loading processors!
+
+'en' 'stanza' model was loaded successfully!
+Traceback (most recent call last):
+  File "/Users/dmytrenko.o/Documents/GitHub/termsExtractor/main.py", line 47, in <module>
+    termsRanker.pymorphy2_most_freq_key_terms(Terms, nGrams,
+  File "/Users/dmytrenko.o/Documents/GitHub/termsExtractor/__modules__/termsRanker.py", line 128, in pymorphy2_most_freq_key_terms
+    mostFreqTerms = CoordBigram(mostFreqTerms)
+  File "/Users/dmytrenko.o/Documents/GitHub/termsExtractor/__modules__/termsRanker.py", line 41, in CoordBigram
+    nw1, nw2 = bigram.split("_")
+ValueError: not enough values to unpack (expected 2, got 1)
+'uk' language model for 'pymorphy2' package was downloaded successfully!
+'uk' 'pymorphy2' model was loaded successfully!
+'ru' language model for 'pymorphy2' package was downloaded successfully!
+'ru' 'pymorphy2' model was loaded successfully!
+Downloading https://raw.githubusercontent.com/stanfordnlp/stanza-resources/main/resources_1.4.0.json:   0%|          | 0.00/26.0k [00:00<?, ?B/s]Downloading https://raw.githubusercontent.com/stanfordnlp/stanza-resources/main/resources_1.4.0.json: 154kB [00:00, 22.8MB/s]                    'json' has been imported
+'fasttext' has been imported
+'nltk' has been imported
+'os' already in sys.modules
+'io' already in sys.modules
+'stop_words' has been imported
+'subprocess' already in sys.modules
+'pymorphy2' has been imported
+'nltk' already in sys.modules
+'spacy' has been imported
+'stanza' has been imported
+'nltk' already in sys.modules
+2022-06-10 14:25:45 INFO: Downloading default packages for language: en (English)...
+2022-06-10 14:25:46 INFO: File exists: /Users/dmytrenko.o/stanza_resources/en/default.zip
+2022-06-10 14:25:50 INFO: Finished downloading models and saved to /Users/dmytrenko.o/stanza_resources.
+
+'en' language model for 'stanza' package was downloaded successfully!
+Downloading https://raw.githubusercontent.com/stanfordnlp/stanza-resources/main/resources_1.4.0.json:   0%|          | 0.00/26.0k [00:00<?, ?B/s]Downloading https://raw.githubusercontent.com/stanfordnlp/stanza-resources/main/resources_1.4.0.json: 154kB [00:00, 4.25MB/s]                    2022-06-10 14:25:50 INFO: Loading these models for language: en (English):
+========================
+| Processor | Package  |
+------------------------
+| tokenize  | combined |
+| pos       | combined |
+| lemma     | combined |
+========================
+
+2022-06-10 14:25:50 INFO: Use device: cpu
+2022-06-10 14:25:50 INFO: Loading: tokenize
+2022-06-10 14:25:50 INFO: Loading: pos
+2022-06-10 14:25:50 INFO: Loading: lemma
+2022-06-10 14:25:50 INFO: Done loading processors!
+
+'en' 'stanza' model was loaded successfully!
+Traceback (most recent call last):
+  File "/Users/dmytrenko.o/Documents/GitHub/termsExtractor/main.py", line 47, in <module>
+    termsRanker.pymorphy2_most_freq_key_terms(Terms, nGrams,
+  File "/Users/dmytrenko.o/Documents/GitHub/termsExtractor/__modules__/termsRanker.py", line 129, in pymorphy2_most_freq_key_terms
+    mostFreqTerms = CoordBigram(mostFreqTerms)
+  File "/Users/dmytrenko.o/Documents/GitHub/termsExtractor/__modules__/termsRanker.py", line 41, in CoordBigram
+    nw1, nw2 = bigram.split("_")
+ValueError: not enough values to unpack (expected 2, got 1)
+'uk' language model for 'pymorphy2' package was downloaded successfully!
+'uk' 'pymorphy2' model was loaded successfully!
+'ru' language model for 'pymorphy2' package was downloaded successfully!
+'ru' 'pymorphy2' model was loaded successfully!
+Downloading https://raw.githubusercontent.com/stanfordnlp/stanza-resources/main/resources_1.4.0.json:   0%|          | 0.00/26.0k [00:00<?, ?B/s]Downloading https://raw.githubusercontent.com/stanfordnlp/stanza-resources/main/resources_1.4.0.json: 154kB [00:00, 25.5MB/s]                    'json' has been imported
+'fasttext' has been imported
+'nltk' has been imported
+'os' already in sys.modules
+'io' already in sys.modules
+'stop_words' has been imported
+'subprocess' already in sys.modules
+'pymorphy2' has been imported
+'nltk' already in sys.modules
+'spacy' has been imported
+'stanza' has been imported
+'nltk' already in sys.modules
+2022-06-10 14:27:32 INFO: Downloading default packages for language: en (English)...
+2022-06-10 14:27:33 INFO: File exists: /Users/dmytrenko.o/stanza_resources/en/default.zip
+2022-06-10 14:27:36 INFO: Finished downloading models and saved to /Users/dmytrenko.o/stanza_resources.
+
+'en' language model for 'stanza' package was downloaded successfully!
+Downloading https://raw.githubusercontent.com/stanfordnlp/stanza-resources/main/resources_1.4.0.json:   0%|          | 0.00/26.0k [00:00<?, ?B/s]Downloading https://raw.githubusercontent.com/stanfordnlp/stanza-resources/main/resources_1.4.0.json: 154kB [00:00, 31.5MB/s]                    2022-06-10 14:27:37 INFO: Loading these models for language: en (English):
+========================
+| Processor | Package  |
+------------------------
+| tokenize  | combined |
+| pos       | combined |
+| lemma     | combined |
+========================
+
+2022-06-10 14:27:37 INFO: Use device: cpu
+2022-06-10 14:27:37 INFO: Loading: tokenize
+2022-06-10 14:27:37 INFO: Loading: pos
+2022-06-10 14:27:37 INFO: Loading: lemma
+2022-06-10 14:27:37 INFO: Done loading processors!
+
+'en' 'stanza' model was loaded successfully!
+Traceback (most recent call last):
+  File "/Users/dmytrenko.o/Documents/GitHub/termsExtractor/main.py", line 47, in <module>
+    termsRanker.pymorphy2_most_freq_key_terms(Terms, nGrams,
+  File "/Users/dmytrenko.o/Documents/GitHub/termsExtractor/__modules__/termsRanker.py", line 131, in pymorphy2_most_freq_key_terms
+    mostFreqTerms = CoordBigram(mostFreqTerms)
+  File "/Users/dmytrenko.o/Documents/GitHub/termsExtractor/__modules__/termsRanker.py", line 41, in CoordBigram
+    nw1, nw2 = bigram.split("_")
+ValueError: not enough values to unpack (expected 2, got 1)
+'uk' language model for 'pymorphy2' package was downloaded successfully!
+'uk' 'pymorphy2' model was loaded successfully!
+'ru' language model for 'pymorphy2' package was downloaded successfully!
+'ru' 'pymorphy2' model was loaded successfully!
+Downloading https://raw.githubusercontent.com/stanfordnlp/stanza-resources/main/resources_1.4.0.json:   0%|          | 0.00/26.0k [00:00<?, ?B/s]Downloading https://raw.githubusercontent.com/stanfordnlp/stanza-resources/main/resources_1.4.0.json: 154kB [00:00, 3.56MB/s]                    'json' has been imported
+'fasttext' has been imported
+'nltk' has been imported
+'os' already in sys.modules
+'io' already in sys.modules
+'stop_words' has been imported
+'subprocess' already in sys.modules
+'pymorphy2' has been imported
+'nltk' already in sys.modules
+'spacy' has been imported
+'stanza' has been imported
+'nltk' already in sys.modules
+2022-06-10 14:29:56 INFO: Downloading default packages for language: en (English)...
+2022-06-10 14:29:57 INFO: File exists: /Users/dmytrenko.o/stanza_resources/en/default.zip
+2022-06-10 14:30:00 INFO: Finished downloading models and saved to /Users/dmytrenko.o/stanza_resources.
+
+'en' language model for 'stanza' package was downloaded successfully!
+Downloading https://raw.githubusercontent.com/stanfordnlp/stanza-resources/main/resources_1.4.0.json:   0%|          | 0.00/26.0k [00:00<?, ?B/s]Downloading https://raw.githubusercontent.com/stanfordnlp/stanza-resources/main/resources_1.4.0.json: 154kB [00:00, 1.52MB/s]                    Downloading https://raw.githubusercontent.com/stanfordnlp/stanza-resources/main/resources_1.4.0.json: 154kB [00:00, 1.51MB/s]2022-06-10 14:30:01 INFO: Loading these models for language: en (English):
+========================
+| Processor | Package  |
+------------------------
+| tokenize  | combined |
+| pos       | combined |
+| lemma     | combined |
+========================
+
+2022-06-10 14:30:01 INFO: Use device: cpu
+2022-06-10 14:30:01 INFO: Loading: tokenize
+2022-06-10 14:30:01 INFO: Loading: pos
+2022-06-10 14:30:01 INFO: Loading: lemma
+2022-06-10 14:30:01 INFO: Done loading processors!
+
+'en' 'stanza' model was loaded successfully!
+Downloading https://raw.githubusercontent.com/stanfordnlp/stanza-resources/main/resources_1.4.0.json:   0%|          | 0.00/26.0k [00:00<?, ?B/s]Downloading https://raw.githubusercontent.com/stanfordnlp/stanza-resources/main/resources_1.4.0.json: 154kB [00:00, 1.50MB/s]                    Downloading https://raw.githubusercontent.com/stanfordnlp/stanza-resources/main/resources_1.4.0.json: 154kB [00:00, 1.49MB/s]
+Downloading https://raw.githubusercontent.com/stanfordnlp/stanza-resources/main/resources_1.4.0.json:   0%|          | 0.00/26.0k [00:00<?, ?B/s]Downloading https://raw.githubusercontent.com/stanfordnlp/stanza-resources/main/resources_1.4.0.json: 154kB [00:00, 30.4MB/s]                    
+Downloading https://raw.githubusercontent.com/stanfordnlp/stanza-resources/main/resources_1.4.0.json:   0%|          | 0.00/26.0k [00:00<?, ?B/s]Downloading https://raw.githubusercontent.com/stanfordnlp/stanza-resources/main/resources_1.4.0.json: 154kB [00:00, 1.45MB/s]                    Downloading https://raw.githubusercontent.com/stanfordnlp/stanza-resources/main/resources_1.4.0.json: 154kB [00:00, 1.45MB/s]
+Downloading https://raw.githubusercontent.com/stanfordnlp/stanza-resources/main/resources_1.4.0.json:   0%|          | 0.00/26.0k [00:00<?, ?B/s]Downloading https://raw.githubusercontent.com/stanfordnlp/stanza-resources/main/resources_1.4.0.json: 154kB [00:00, 267kB/s]                     Downloading https://raw.githubusercontent.com/stanfordnlp/stanza-resources/main/resources_1.4.0.json: 154kB [00:00, 267kB/s]
+Downloading https://raw.githubusercontent.com/stanfordnlp/stanza-resources/main/resources_1.4.0.json:   0%|          | 0.00/26.0k [00:00<?, ?B/s]Downloading https://raw.githubusercontent.com/stanfordnlp/stanza-resources/main/resources_1.4.0.json: 154kB [00:00, 1.47MB/s]                    Downloading https://raw.githubusercontent.com/stanfordnlp/stanza-resources/main/resources_1.4.0.json: 154kB [00:00, 1.46MB/s]
+Downloading https://raw.githubusercontent.com/stanfordnlp/stanza-resources/main/resources_1.4.0.json:   0%|          | 0.00/26.0k [00:00<?, ?B/s]Downloading https://raw.githubusercontent.com/stanfordnlp/stanza-resources/main/resources_1.4.0.json: 154kB [00:00, 1.41MB/s]                    Downloading https://raw.githubusercontent.com/stanfordnlp/stanza-resources/main/resources_1.4.0.json: 154kB [00:00, 1.40MB/s]
+Downloading https://raw.githubusercontent.com/stanfordnlp/stanza-resources/main/resources_1.4.0.json:   0%|          | 0.00/26.0k [00:00<?, ?B/s]Downloading https://raw.githubusercontent.com/stanfordnlp/stanza-resources/main/resources_1.4.0.json: 154kB [00:00, 4.61MB/s]                    
+Downloading https://raw.githubusercontent.com/stanfordnlp/stanza-resources/main/resources_1.4.0.json:   0%|          | 0.00/26.0k [00:00<?, ?B/s]Downloading https://raw.githubusercontent.com/stanfordnlp/stanza-resources/main/resources_1.4.0.json: 154kB [00:00, 21.8MB/s]                    
+Downloading https://raw.githubusercontent.com/stanfordnlp/stanza-resources/main/resources_1.4.0.json:   0%|          | 0.00/26.0k [00:00<?, ?B/s]Downloading https://raw.githubusercontent.com/stanfordnlp/stanza-resources/main/resources_1.4.0.json: 154kB [00:00, 1.40MB/s]                    Downloading https://raw.githubusercontent.com/stanfordnlp/stanza-resources/main/resources_1.4.0.json: 154kB [00:00, 1.39MB/s]
+Downloading https://raw.githubusercontent.com/stanfordnlp/stanza-resources/main/resources_1.4.0.json:   0%|          | 0.00/26.0k [00:00<?, ?B/s]Downloading https://raw.githubusercontent.com/stanfordnlp/stanza-resources/main/resources_1.4.0.json: 154kB [00:00, 22.0MB/s]                    
+Downloading https://raw.githubusercontent.com/stanfordnlp/stanza-resources/main/resources_1.4.0.json:   0%|          | 0.00/26.0k [00:00<?, ?B/s]Downloading https://raw.githubusercontent.com/stanfordnlp/stanza-resources/main/resources_1.4.0.json: 154kB [00:00, 2.12MB/s]                    
+Downloading https://raw.githubusercontent.com/stanfordnlp/stanza-resources/main/resources_1.4.0.json:   0%|          | 0.00/26.0k [00:00<?, ?B/s]Downloading https://raw.githubusercontent.com/stanfordnlp/stanza-resources/main/resources_1.4.0.json: 154kB [00:00, 21.9MB/s]                    
+Downloading https://raw.githubusercontent.com/stanfordnlp/stanza-resources/main/resources_1.4.0.json:   0%|          | 0.00/26.0k [00:00<?, ?B/s]Downloading https://raw.githubusercontent.com/stanfordnlp/stanza-resources/main/resources_1.4.0.json: 154kB [00:00, 1.66MB/s]                    
+
+You are lucky! The program successfully finished!
+
+79.39770793914795
