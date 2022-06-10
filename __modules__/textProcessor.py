@@ -1,11 +1,5 @@
 # -*- coding: utf-8 -*-
 """
-Created on Wed Feb  2:44:23 2022
-Edited on Wed Fri 25 11:12:34 2022
-Edited on Wed Sat 26 23:57:53 2022
-Edited on Sun Mar  6 04:44:17 2022
-Edited on Thu Mar  8 05:57:23 2022
-Edited on Wed Mar  9 09:06:35 2022
 
 @author: Олег Дмитренко
 

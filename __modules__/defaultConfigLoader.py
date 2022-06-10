@@ -1,8 +1,5 @@
 # -*- coding: utf-8 -*-
 """
-Created on Mon Mar  7 04:58:45 2022
-Edited on Thu Mar  8 05:39:45 2022
-Edited on Wed Mar  9 05:38:58 2022
 
 @author: dmytrenko.o
 """
