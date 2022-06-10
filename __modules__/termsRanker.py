@@ -43,8 +43,7 @@ def CoordBigram(mostFreqTerms):
     CoordMostFreqTerms = ''
     for bigram in mostFreqTerms.split(", "):
         nw1, nw2 = bigram.split("_")
-        #print (nw2[-1:], nw2[-2:], nw2[-3:])
-        if (nw2[-1:] == "а") or (nw2[-2:] == "ль"):
+        if (nw2[-1:] == "а"):
             if (nw1[-3:] == "вой"):
                 nw1 = nw1[:-3]+"вая"
             elif(nw1[-3:] == "ный"):
@@ -53,6 +52,17 @@ def CoordBigram(mostFreqTerms):
                 nw1 = nw1[:-3]+"кая"
             elif(nw1[-2:] == "ый"):
                 nw1 = nw1[:-2]+"ая"
+        elif (nw2[-2:] == "ль"):
+            if (nw1[-3:] == "вой"):
+                nw1 = nw1[:-3]+"вая"
+            elif(nw1[-3:] == "ный"):
+                nw1 = nw1[:-3]+"ная"
+            elif(nw1[-3:] == "гий"):
+                nw1 = nw1[:-3]+"гая"
+            elif(nw1[-3:] == "ший"):
+                nw1 = nw1[:-3]+"шая"
+            elif(nw1[-3:] == "щий"):
+                nw1 = nw1[:-3]+"щая"
         elif (nw2[-1:] == "я"):
             if (nw1[-3:] == "вой"):
                 nw1 = nw1[:-3]+"вая"
@@ -64,7 +74,20 @@ def CoordBigram(mostFreqTerms):
                 nw1 = nw1[:-3]+"шая"
             elif(nw1[-3:] == "щий"):
                 nw1 = nw1[:-3]+"щая"
-        elif (nw2[-2:] == "ие") or (nw2[-1:] == "o"):
+        elif (nw2[-3:] == "сть"):
+            if (nw1[-3:] == "вой"):
+                nw1 = nw1[:-3]+"вая"
+            elif(nw1[-3:] == "ный"):
+                nw1 = nw1[:-3]+"ная"
+            elif(nw1[-3:] == "гий"):
+                nw1 = nw1[:-3]+"гая"
+            elif(nw1[-3:] == "ший"):
+                nw1 = nw1[:-3]+"шая"
+            elif(nw1[-3:] == "щий"):
+                nw1 = nw1[:-3]+"щая"
+            elif(nw1[-3:] == "кий"):
+                nw1 = nw1[:-3]+"кая"
+        elif (nw2[-2:] == "ие"):
              if (nw1[-2:] == "ый"):
                  nw1 = nw1[:-2]+"ое"
              elif(nw1[-2:] == "ой"):
@@ -75,6 +98,18 @@ def CoordBigram(mostFreqTerms):
                  nw1 = nw1[:-3]+"щее"
              elif(nw1[-3:] == "кий"):
                  nw1 = nw1[:-3]+"кое"
+        elif (nw2[-1:] == "о"):
+             if (nw1[-2:] == "ый"):
+                 nw1 = nw1[:-2]+"ое"
+             elif(nw1[-2:] == "ой"):
+                 nw1 = nw1[:-2]+"ое"
+             elif(nw1[-3:] == "ший"):
+                 nw1 = nw1[:-3]+"шее"
+             elif(nw1[-3:] == "щий"):
+                 nw1 = nw1[:-3]+"щее"
+             elif(nw1[-3:] == "кий"):
+                 nw1 = nw1[:-3]+"кое"
+
         CoordMostFreqTerms = CoordMostFreqTerms + nw1+"_"+nw2 + ', ' 
     return CoordMostFreqTerms[:-2]
 
@@ -94,11 +129,12 @@ def pymorphy2_most_freq_key_terms(Terms, nGrams, top):
         mostFreqTerms, mostFreqSTerms = pymorphy2_most_freq(Terms[i][1], Terms[i][2], top)
         if nGrams[i] == "Bigrams":
             mostFreqTerms = CoordBigram(mostFreqTerms)
+        elif nGrams[i] == "Threegrams":
+            mostFreqTerms = ''
+            for sTerm in mostFreqSTerms:
+                mostFreqTerms = mostFreqTerms + str(get_key(Terms[i][0], Terms[i][1][sTerm])) + ', ' 
+            mostFreqTerms = mostFreqTerms[:-2]
         print('<'+nGrams[i]+'>'+mostFreqTerms+'</'+nGrams[i]+'>')
-        mostFreqTerms = ''
-        for sTerm in mostFreqSTerms:
-            mostFreqTerms = mostFreqTerms + str(get_key(Terms[i][0], Terms[i][1][sTerm])) + ', ' 
-        print('<Source '+nGrams[i]+'>'+mostFreqTerms[:-2]+'</Source '+nGrams[i]+'>')
     print('***')
     sys.stdout = stdOutput
     return
