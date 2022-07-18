@@ -32,7 +32,7 @@ def stanza_built_bigrams(WordsTags, NBigrams, stopWords):
         t1 = WordsTags[i-1][1]
         t2 = WordsTags[i][1]
         if (t1 == 'ADJ') and (t2 == 'NOUN') and (w1 not in stopWords) and (w2 not in stopWords):
-            NBigrams.append(w1+'_'+w2)
+            NBigrams.append(w1+'~'+w2)
     return NBigrams
 
 def stanza_built_threegrams(WordsTags, NThreegrams, stopWords):
@@ -44,9 +44,9 @@ def stanza_built_threegrams(WordsTags, NThreegrams, stopWords):
         t2 = WordsTags[i-1][1]
         t3 = WordsTags[i][1]
         if (t1 == 'NOUN') and ((t2 == 'CCONJ') or (t2 == 'ADP')) and (t3 == 'NOUN') and (w1 not in stopWords) and (w3 not in stopWords):
-            NThreegrams.append(w1+'_'+w2+'_'+w3)
+            NThreegrams.append(w1+'~'+w2+'~'+w3)
         elif (t1 == 'ADJ') and (t2 == 'ADJ') and (t3 == 'NOUN') and (w1 not in stopWords) and (w2 not in stopWords) and (w3 not in stopWords):
-            NThreegrams.append(w1+'_'+w2+'_'+w3)    
+            NThreegrams.append(w1+'~'+w2+'~'+w3)    
     return NThreegrams
 
 def stanza_nlp(text, nlpModel, stopWords, nGrams):
@@ -83,9 +83,9 @@ def CoordBigram(Bigrams, nw1, nw2, nlpModel):
     nounMorph = nlpModel.parse(nw2)[0]
     nounGender = nounMorph.tag.gender
     if nounGender == "masc":   
-        Bigrams[nw1+'_'+nw2] = nw1+'_'+nw2
+        Bigrams[nw1+'~'+nw2] = nw1+'~'+nw2
     else:
-        Bigrams[adjMorph.inflect({nounGender}).word+'_'+nw2] = nw1+'_'+nw2
+        Bigrams[adjMorph.inflect({nounGender}).word+'~'+nw2] = nw1+'~'+nw2
       
 def pymorphy2_built_bigrams(WordsTags, Words, Bigrams, NBigrams, nlpModel, stopWords):
     for i in range(1, len(WordsTags)):
@@ -96,12 +96,12 @@ def pymorphy2_built_bigrams(WordsTags, Words, Bigrams, NBigrams, nlpModel, stopW
         t1 = WordsTags[i-1][1]
         t2 = WordsTags[i][1]
         if (t1 == 'ADJF') and (t2 == 'NOUN') and (nw1 not in stopWords) and (nw2 not in stopWords):
-            NBigrams.append(nw1+'_'+nw2)
+            NBigrams.append(nw1+'~'+nw2)
             try:
-                #CoordBigram(Bigrams, nw1, nw2, nlpModel)
-                Bigrams[w1+'_'+w2] = nw1+'_'+nw2
+                #CoordBigram(Bigrams, nw1, nw2, nlpModel) #
+                Bigrams[w1+'~'+w2] = nw1+'~'+nw2
             except:
-                Bigrams[w1+'_'+w2] = nw1+'_'+nw2
+                Bigrams[w1+'~'+w2] = nw1+'~'+nw2
                 continue
     return Bigrams, NBigrams
 
@@ -117,13 +117,13 @@ def pymorphy2_built_threegrams(WordsTags, Words, Threegrams, SThreegrams, NThree
         t2 = WordsTags[i-1][1]
         t3 = WordsTags[i][1]
         if (t1 == 'NOUN') and ((t2 == 'CCONJ') or (t2 == 'PREP')) and (t3 == 'NOUN') and (nw1 not in stopWords) and (nw3 not in stopWords):
-            NThreegrams.append(nw1+'_'+nw2+'_'+nw3)
-            SThreegrams[nw1+'_'+nw2+'_'+w3] = nw1+'_'+nw2+'_'+nw3
-            Threegrams[w1+'_'+w2+'_'+w3] = nw1+'_'+nw2+'_'+nw3
+            NThreegrams.append(nw1+'~'+nw2+'~'+nw3)
+            SThreegrams[nw1+'~'+nw2+'~'+w3] = nw1+'~'+nw2+'~'+nw3
+            Threegrams[w1+'~'+w2+'~'+w3] = nw1+'~'+nw2+'~'+nw3
         elif (t1 == 'ADJF') and (t2 == 'ADJF') and (t3 == 'NOUN') and (nw1 not in stopWords) and (nw2 not in stopWords) and (nw3 not in stopWords):
-            NThreegrams.append(nw1+'_'+nw2+'_'+nw3)
-            SThreegrams[nw1+'_'+nw2+'_'+w3] = nw1+'_'+nw2+'_'+nw3
-            Threegrams[w1+'_'+w2+'_'+w3] = nw1+'_'+nw2+'_'+nw3
+            NThreegrams.append(nw1+'~'+nw2+'~'+nw3)
+            SThreegrams[nw1+'~'+nw2+'~'+w3] = nw1+'~'+nw2+'~'+nw3
+            Threegrams[w1+'~'+w2+'~'+w3] = nw1+'~'+nw2+'~'+nw3
     return Threegrams, SThreegrams, NThreegrams
 
 def pymorphy2_nlp(text, nlpModel, stopWords, nGrams):

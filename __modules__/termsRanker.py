@@ -38,7 +38,7 @@ def get_key(d, value):
 def CoordBigram(mostFreqTerms):
     CoordMostFreqTerms = ''
     for bigram in mostFreqTerms.split(", "):
-        nw1, nw2 = bigram.split("_")
+        nw1, nw2 = bigram.split('~')
         if (nw2[-1:] == "а"):
             if (nw1[-3:] == "вой"):
                 nw1 = nw1[:-3]+"вая"
@@ -106,7 +106,7 @@ def CoordBigram(mostFreqTerms):
              elif(nw1[-3:] == "кий"):
                  nw1 = nw1[:-3]+"кое"
 
-        CoordMostFreqTerms = CoordMostFreqTerms + nw1+"_"+nw2 + ', ' 
+        CoordMostFreqTerms = CoordMostFreqTerms + nw1+'~'+nw2 + ', ' 
     return CoordMostFreqTerms[:-2]
 
 def pymorphy2_most_freq(STerms, NTerms, top):
